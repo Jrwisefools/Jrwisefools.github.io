@@ -4,7 +4,7 @@ date: 2025-08-10
 tags:
   - FastAPI
   - Python
-archived: true
+archived: false
 ---
 # FastAPI
 fastapi底层就是由协程实现的,用于构建API，是建立在Starlette和Pydantic基础上

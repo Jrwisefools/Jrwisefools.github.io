@@ -11,7 +11,8 @@ const TOPIC_GROUPS = [
   { dir: 'llm', text: '大模型', desc: '大模型基础概念与 RAG 检索增强' },
   { dir: 'langchain', text: 'LangChain', desc: '提示词模板、工具调用与 Agent' },
   { dir: 'langgraph', text: 'LangGraph', desc: '用图的方式编排智能体流程' },
-  { dir: 'finetune', text: '模型微调', desc: '微调原理与训练流程' }
+  { dir: 'finetune', text: '模型微调', desc: '微调原理与训练流程' },
+  { dir: 'backend', text: '后端', desc: '协程与 FastAPI 服务开发' }
 ]
 
 const ARCHIVE_GROUPS = [

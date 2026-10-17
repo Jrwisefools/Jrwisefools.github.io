@@ -1,23 +1,78 @@
-/* .vitepress/theme/style.css */
+/* .vitepress/theme/style.css
+ * 蓝灰配色。浅色 / 深色两套变量，深色由 VitePress 默认主题在 <html> 上挂 .dark 触发。
+ * 组件样式一律引用 --c-* 变量、不写死颜色，两套主题共用同一份规则。
+ * 正文各层级文字对背景的对比度均 ≥ 4.5:1。
+ */
+
 :root {
-  --vp-c-bg: #f8fbff;
-  --vp-c-bg-soft: #f8fbff;
-  --vp-c-bg-elv: #f8fbff;
-  --vp-c-text-1: #2c4a6e;
-  --vp-c-text-2: #3a5f8a;
-  --vp-c-text-3: #6b8aae;
-  --vp-c-brand-1: #2c5f8a;
-  --vp-c-brand-2: #3a7ab0;
-  --vp-c-nav-bg: #f8fbff;
-  --vp-c-nav-screen-bg: #f8fbff;
-  --vp-c-border: #d0dce8;
-  --vp-c-divider: #d0dce8;
+  --c-bg: #f8fbff;
+  --c-surface: #eef4fa;
+  --c-card: #e8f0f8;
+  --c-tag: #e0eaf5;
+  --c-border: #d0dce8;
+  --c-divider: #e0eaf5;
+  --c-text-1: #2c4a6e;
+  --c-text-2: #3a5f8a;
+  --c-text-3: #517695;
+  --c-text-4: #5a7491;
+  --c-brand: #2c5f8a;
+  --c-brand-hover: #3a7ab0;
+  --c-btn-text: #ffffff;
+
+  --vp-c-bg: var(--c-bg);
+  --vp-c-bg-soft: var(--c-bg);
+  --vp-c-bg-elv: var(--c-bg);
+  --vp-c-text-1: var(--c-text-1);
+  --vp-c-text-2: var(--c-text-2);
+  --vp-c-text-3: var(--c-text-3);
+  --vp-c-brand-1: var(--c-brand);
+  --vp-c-brand-2: var(--c-brand-hover);
+  --vp-c-nav-bg: var(--c-bg);
+  --vp-c-nav-screen-bg: var(--c-bg);
+  --vp-c-border: var(--c-border);
+  --vp-c-divider: var(--c-divider);
+}
+
+.dark {
+  --c-bg: #131a24;
+  --c-surface: #1a222e;
+  --c-card: #1c2531;
+  --c-tag: #23303f;
+  --c-border: #2b3644;
+  --c-divider: #232e3b;
+  --c-text-1: #dbe4ee;
+  --c-text-2: #b3c4d6;
+  --c-text-3: #94a8bd;
+  --c-text-4: #8497ac;
+  --c-brand: #7cb0dc;
+  --c-brand-hover: #9dc8ec;
+  --c-btn-text: #0f1620;
+
+  --vp-c-bg: var(--c-bg);
+  --vp-c-bg-soft: var(--c-surface);
+  --vp-c-bg-elv: var(--c-surface);
+  --vp-c-text-1: var(--c-text-1);
+  --vp-c-text-2: var(--c-text-2);
+  --vp-c-text-3: var(--c-text-3);
+  --vp-c-brand-1: var(--c-brand);
+  --vp-c-brand-2: var(--c-brand-hover);
+  --vp-c-nav-bg: var(--c-bg);
+  --vp-c-nav-screen-bg: var(--c-surface);
+  --vp-c-border: var(--c-border);
+  --vp-c-divider: var(--c-divider);
 }
 
 body {
-  background-color: #f8fbff;
+  background-color: var(--c-bg);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-  color: #2c4a6e;
+  color: var(--c-text-2);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* 笔记里引用的截图多为浅底，加描边避免在深色页面里“漂浮” */
+.VPDoc img {
+  border-radius: 8px;
+  border: 1px solid var(--c-border);
 }
 
 /* 导航栏 */
@@ -27,7 +82,7 @@ body {
 
 .VPNav .VPNav-bar {
   background: transparent;
-  border-bottom: 1px solid #d0dce8;
+  border-bottom: 1px solid var(--c-border);
 }
 
 .VPNav .nav-title,
@@ -35,15 +90,15 @@ body {
   font-size: 0.95rem;
   letter-spacing: 0.05em;
   font-weight: 500;
-  color: #3a5f8a;
+  color: var(--c-text-2);
 }
 
 .VPNav .nav-item:hover {
-  color: #2c4a6e;
+  color: var(--c-text-1);
 }
 
-/* 首页内容区 */
-/* 笔记页需要侧边栏导航，不再全局隐藏。
+/* 内容容器
+   笔记页需要侧边栏导航，不再全局隐藏。
    首页（layout: page）与关于页没有匹配 /notes/ 的 sidebar 规则，自然不显示侧边栏。 */
 .VPContent .container {
   max-width: 1120px;
@@ -76,14 +131,14 @@ body {
 .hero-section h1 {
   font-size: 2.8rem;
   font-weight: 700;
-  color: #2c4a6e;
+  color: var(--c-text-1);
   margin: 16px 0 12px;
   letter-spacing: -0.01em;
 }
 
 .hero-typewriter {
   font-size: 1.1rem;
-  color: #6b8aae;
+  color: var(--c-text-3);
   font-weight: 300;
   min-height: 1.6em;
 }
@@ -102,26 +157,26 @@ body {
   font-size: 0.95rem;
   text-decoration: none;
   transition: all 0.2s;
-  border: 1px solid #d0dce8;
-  color: #3a5f8a;
+  border: 1px solid var(--c-border);
+  color: var(--c-text-2);
   background: transparent;
 }
 
 .hero-btn:hover {
-  border-color: #3a7ab0;
-  color: #2c5f8a;
+  border-color: var(--c-brand-hover);
+  color: var(--c-brand);
 }
 
 .hero-btn.primary {
-  background: #2c5f8a;
-  color: #fff;
-  border-color: #2c5f8a;
+  background: var(--c-brand);
+  color: var(--c-btn-text);
+  border-color: var(--c-brand);
 }
 
 .hero-btn.primary:hover {
-  background: #3a7ab0;
-  border-color: #3a7ab0;
-  color: #fff;
+  background: var(--c-brand-hover);
+  border-color: var(--c-brand-hover);
+  color: var(--c-btn-text);
 }
 
 .hero-github {
@@ -130,12 +185,12 @@ body {
   gap: 8px;
   margin-top: 24px;
   font-size: 0.9rem;
-  color: #6b8aae;
+  color: var(--c-text-3);
   text-decoration: none;
 }
 
 .hero-github:hover {
-  color: #3a5f8a;
+  color: var(--c-brand);
 }
 
 /* 区块通用 */
@@ -146,14 +201,14 @@ body {
 .home-section h2 {
   font-size: 1.3rem;
   font-weight: 600;
-  color: #2c4a6e;
+  color: var(--c-text-1);
   margin-bottom: 16px;
 }
 
 .intro-text {
   font-size: 0.95rem;
   line-height: 1.7;
-  color: #3a5f8a;
+  color: var(--c-text-2);
   margin-bottom: 20px;
 }
 
@@ -168,8 +223,8 @@ body {
   padding: 6px 14px;
   border-radius: 20px;
   font-size: 0.85rem;
-  background: #e0eaf5;
-  color: #3a5f8a;
+  background: var(--c-tag);
+  color: var(--c-text-3);
 }
 
 /* 文章列表 */
@@ -181,21 +236,21 @@ body {
 
 .post-list li {
   padding: 12px 0;
-  border-bottom: 1px solid #e0eaf5;
+  border-bottom: 1px solid var(--c-divider);
 }
 
 .post-list a {
-  color: #2c4a6e;
+  color: var(--c-text-1);
   text-decoration: none;
   font-size: 1rem;
 }
 
 .post-list a:hover {
-  color: #3a7ab0;
+  color: var(--c-brand);
 }
 
 .post-date {
-  color: #8a9db0;
+  color: var(--c-text-4);
   font-size: 0.85rem;
   margin-left: 12px;
 }
@@ -210,33 +265,33 @@ body {
 .project-card {
   padding: 20px;
   border-radius: 10px;
-  background: #e8f0f8;
-  border: 1px solid #d0dce8;
+  background: var(--c-card);
+  border: 1px solid var(--c-border);
 }
 
 .project-card h3 {
   font-size: 1rem;
   font-weight: 600;
   margin-bottom: 8px;
-  color: #2c4a6e;
+  color: var(--c-text-1);
 }
 
 .project-card p {
   font-size: 0.9rem;
-  color: #6b8aae;
+  color: var(--c-text-3);
   line-height: 1.5;
 }
 
 .card-link {
   display: inline-block;
   margin-top: 8px;
-  color: #3a7ab0;
+  color: var(--c-brand);
   text-decoration: none;
   font-size: 0.9rem;
 }
 
 .card-link.pending {
-  color: #a0b8d0;
+  color: var(--c-text-4);
 }
 
 /* 头像 */
@@ -256,8 +311,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #2c5f8a;
-  color: #fff;
+  background: var(--c-brand);
+  color: var(--c-btn-text);
   font-size: 1.5rem;
   font-weight: 600;
 }
@@ -268,7 +323,7 @@ body {
 
 /* 空状态 */
 .empty-note {
-  color: #8a9db0;
+  color: var(--c-text-4);
   font-size: 0.95rem;
 }
 
@@ -280,12 +335,12 @@ body {
 
 .notes-stat {
   font-size: 0.9rem;
-  color: #6b8aae;
+  color: var(--c-text-3);
   margin-bottom: 28px;
 }
 
 .notes-stat strong {
-  color: #2c5f8a;
+  color: var(--c-brand);
   font-weight: 600;
 }
 
@@ -296,20 +351,20 @@ body {
 .note-group h2 {
   font-size: 1.2rem;
   font-weight: 600;
-  color: #2c4a6e;
+  color: var(--c-text-1);
   margin-bottom: 4px;
 }
 
 .note-group h3 {
   font-size: 1.05rem;
   font-weight: 600;
-  color: #2c4a6e;
+  color: var(--c-text-1);
   margin: 24px 0 4px;
 }
 
 .group-desc {
   font-size: 0.9rem;
-  color: #6b8aae;
+  color: var(--c-text-3);
   margin-bottom: 12px;
 }
 
@@ -321,7 +376,7 @@ body {
 
 .note-list li {
   padding: 10px 0;
-  border-bottom: 1px solid #e0eaf5;
+  border-bottom: 1px solid var(--c-divider);
   display: flex;
   align-items: baseline;
   flex-wrap: wrap;
@@ -329,17 +384,17 @@ body {
 }
 
 .note-list a {
-  color: #2c4a6e;
+  color: var(--c-text-1);
   text-decoration: none;
   font-size: 1rem;
 }
 
 .note-list a:hover {
-  color: #3a7ab0;
+  color: var(--c-brand);
 }
 
 .note-date {
-  color: #8a9db0;
+  color: var(--c-text-4);
   font-size: 0.82rem;
 }
 
@@ -354,8 +409,8 @@ body {
   font-size: 0.75rem;
   padding: 2px 8px;
   border-radius: 10px;
-  background: #e0eaf5;
-  color: #6b8aae;
+  background: var(--c-tag);
+  color: var(--c-text-3);
 }
 
 /* 基础课归档折叠区 */
@@ -363,15 +418,15 @@ body {
   margin-top: 8px;
   padding: 16px 20px;
   border-radius: 10px;
-  background: #eef4fa;
-  border: 1px solid #d0dce8;
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
 }
 
 .archive-block summary {
   cursor: pointer;
   font-size: 0.95rem;
   font-weight: 600;
-  color: #3a5f8a;
+  color: var(--c-text-2);
 }
 
 .archive-block .group-desc {

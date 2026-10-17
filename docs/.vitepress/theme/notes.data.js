@@ -8,6 +8,7 @@ const TOPICS = [
   { key: 'langchain', text: 'LangChain', desc: '提示词模板、工具调用与 Agent', archived: false },
   { key: 'langgraph', text: 'LangGraph', desc: '用图的方式编排智能体流程', archived: false },
   { key: 'finetune', text: '模型微调', desc: '微调原理与训练流程', archived: false },
+  { key: 'backend', text: '后端', desc: '协程与 FastAPI 服务开发', archived: false },
   { key: 'python', text: 'Python 基础', desc: '语法、面向对象与并发编程', archived: true },
   { key: 'linux-mysql', text: 'Linux & MySQL', desc: '系统操作、Shell 与数据库', archived: true }
 ]
