@@ -5,6 +5,7 @@ import HeroAvatar from './HeroAvatar.vue'
 import HeroTypewriter from './HeroTypewriter.vue'
 import PostList from './PostList.vue'
 import ProjectCards from './ProjectCards.vue'
+import NotesIndex from './NotesIndex.vue'
 import './style.css'
 
 export default {
@@ -15,5 +16,6 @@ export default {
     app.component('HeroTypewriter', HeroTypewriter)
     app.component('PostList', PostList)
     app.component('ProjectCards', ProjectCards)
+    app.component('NotesIndex', NotesIndex)
   }
 }

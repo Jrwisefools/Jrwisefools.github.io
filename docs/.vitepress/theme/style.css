@@ -1,28 +1,28 @@
 /* .vitepress/theme/style.css */
 :root {
-  --vp-c-bg: #f0f5fa;
-  --vp-c-bg-soft: #f0f5fa;
-  --vp-c-bg-elv: #f0f5fa;
+  --vp-c-bg: #f8fbff;
+  --vp-c-bg-soft: #f8fbff;
+  --vp-c-bg-elv: #f8fbff;
   --vp-c-text-1: #2c4a6e;
   --vp-c-text-2: #3a5f8a;
   --vp-c-text-3: #6b8aae;
   --vp-c-brand-1: #2c5f8a;
   --vp-c-brand-2: #3a7ab0;
-  --vp-c-nav-bg: #f0f5fa;
-  --vp-c-nav-screen-bg: #f0f5fa;
+  --vp-c-nav-bg: #f8fbff;
+  --vp-c-nav-screen-bg: #f8fbff;
   --vp-c-border: #d0dce8;
   --vp-c-divider: #d0dce8;
 }
 
 body {
-  background-color: #f0f5fa;
+  background-color: #f8fbff;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
   color: #2c4a6e;
 }
 
 /* 导航栏 */
 .VPNav .container {
-  max-width: 720px;
+  max-width: 1120px;
 }
 
 .VPNav .VPNav-bar {
@@ -43,16 +43,20 @@ body {
 }
 
 /* 首页内容区 */
+/* 笔记页需要侧边栏导航，不再全局隐藏。
+   首页（layout: page）与关于页没有匹配 /notes/ 的 sidebar 规则，自然不显示侧边栏。 */
 .VPContent .container {
-  max-width: 720px;
-}
-
-.VPSidebar {
-  display: none !important;
+  max-width: 1120px;
 }
 
 .VPDoc .container {
   max-width: 720px;
+}
+
+@media (max-width: 960px) {
+  .VPContent .container {
+    max-width: 720px;
+  }
 }
 
 /* ========== 首页组件样式 ========== */
@@ -265,5 +269,115 @@ body {
 /* 空状态 */
 .empty-note {
   color: #8a9db0;
+  font-size: 0.95rem;
+}
+
+/* ========== 笔记总览页 ========== */
+
+.notes-index {
+  max-width: 720px;
+}
+
+.notes-stat {
+  font-size: 0.9rem;
+  color: #6b8aae;
+  margin-bottom: 28px;
+}
+
+.notes-stat strong {
+  color: #2c5f8a;
+  font-weight: 600;
+}
+
+.note-group {
+  margin-bottom: 32px;
+}
+
+.note-group h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #2c4a6e;
+  margin-bottom: 4px;
+}
+
+.note-group h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #2c4a6e;
+  margin: 24px 0 4px;
+}
+
+.group-desc {
+  font-size: 0.9rem;
+  color: #6b8aae;
+  margin-bottom: 12px;
+}
+
+.note-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.note-list li {
+  padding: 10px 0;
+  border-bottom: 1px solid #e0eaf5;
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.note-list a {
+  color: #2c4a6e;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.note-list a:hover {
+  color: #3a7ab0;
+}
+
+.note-date {
+  color: #8a9db0;
+  font-size: 0.82rem;
+}
+
+.note-tags {
+  display: inline-flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.note-tags em {
+  font-style: normal;
+  font-size: 0.75rem;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: #e0eaf5;
+  color: #6b8aae;
+}
+
+/* 基础课归档折叠区 */
+.archive-block {
+  margin-top: 8px;
+  padding: 16px 20px;
+  border-radius: 10px;
+  background: #eef4fa;
+  border: 1px solid #d0dce8;
+}
+
+.archive-block summary {
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #3a5f8a;
+}
+
+.archive-block .group-desc {
+  margin-top: 10px;
+}
+
+.archive-block .note-list a {
   font-size: 0.95rem;
 }
