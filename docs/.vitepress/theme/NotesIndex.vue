@@ -5,6 +5,7 @@
  * 按主题分组展示；基础课归入「归档」折叠区，不进入首页最新列表。
  */
 import { data } from './notes.data.js'
+import { tagLink } from './tagLink.js'
 
 const formatDate = (d) => {
   if (d == null) return ''
@@ -32,7 +33,7 @@ const formatDate = (d) => {
           <a :href="p.url">{{ p.title }}</a>
           <span class="note-date">{{ formatDate(p.date) }}</span>
           <span class="note-tags">
-            <em v-for="t in p.tags" :key="t">{{ t }}</em>
+            <a v-for="t in p.tags" :key="t" :href="tagLink(t)">{{ t }}</a>
           </span>
         </li>
       </ul>

@@ -4,6 +4,7 @@
  * 数据来自 archive.data.js。
  */
 import { data } from './archive.data.js'
+import { tagLink } from './tagLink.js'
 </script>
 
 <template>
@@ -25,7 +26,7 @@ import { data } from './archive.data.js'
                 {{ p.archived ? '课堂速记' : '已整理' }}
               </em>
               <span class="note-tags">
-                <em v-for="t in p.tags" :key="t">{{ t }}</em>
+                <a v-for="t in p.tags" :key="t" :href="tagLink(t)">{{ t }}</a>
               </span>
             </div>
           </div>

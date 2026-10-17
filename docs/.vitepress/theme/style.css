@@ -467,13 +467,21 @@ body {
   flex-wrap: wrap;
 }
 
-.note-tags em {
+.note-tags em,
+.note-tags a {
   font-style: normal;
   font-size: 0.75rem;
   padding: 2px 8px;
   border-radius: 10px;
   background: var(--c-tag);
   color: var(--c-text-3);
+  text-decoration: none;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+.note-tags a:hover {
+  color: var(--c-brand);
+  background: var(--c-surface);
 }
 
 /* 基础课归档折叠区 */
@@ -719,13 +727,21 @@ body {
   margin-left: 4px;
 }
 
-.pm-tags em {
+.pm-tags em,
+.pm-tags a {
   font-style: normal;
   font-size: 0.72rem;
   padding: 2px 8px;
   border-radius: 10px;
   background: var(--c-tag);
   color: var(--c-text-3);
+  text-decoration: none;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+.pm-tags a:hover {
+  color: var(--c-brand);
+  background: var(--c-surface);
 }
 
 /* 代码块复制按钮 */

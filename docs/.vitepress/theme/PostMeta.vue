@@ -6,6 +6,7 @@
  */
 import { computed, ref, onMounted, nextTick, watch } from 'vue'
 import { useData } from 'vitepress'
+import { tagLink } from './tagLink.js'
 
 const { page, frontmatter } = useData()
 const wordCount = ref(0)
@@ -50,7 +51,7 @@ watch(() => page.value.relativePath, () => nextTick(count))
     <span class="pm-sep">·</span>
     <span>约 {{ readMinutes }} 分钟</span>
     <span v-if="frontmatter.tags && frontmatter.tags.length" class="pm-tags">
-      <em v-for="t in frontmatter.tags" :key="t">{{ t }}</em>
+      <a v-for="t in frontmatter.tags" :key="t" :href="tagLink(t)">{{ t }}</a>
     </span>
   </div>
 </template>

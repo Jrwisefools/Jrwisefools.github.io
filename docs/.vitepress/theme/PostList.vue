@@ -5,6 +5,7 @@
  * 按日期倒序取前 5 条；目录为空时展示占位文案。
  */
 import { data } from './posts.data.js'
+import { tagLink } from './tagLink.js'
 
 const formatDate = (d) => {
   if (d == null) return ''
@@ -31,7 +32,11 @@ const formatDate = (d) => {
         <div class="post-card-meta">
           <span class="post-date">{{ formatDate(post.frontmatter.date) }}</span>
           <span v-if="post.frontmatter.tags && post.frontmatter.tags.length" class="note-tags">
-            <em v-for="t in post.frontmatter.tags.slice(0, 3)" :key="t">{{ t }}</em>
+            <a
+              v-for="t in post.frontmatter.tags.slice(0, 3)"
+              :key="t"
+              :href="tagLink(t)"
+            >{{ t }}</a>
           </span>
         </div>
       </li>
