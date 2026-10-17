@@ -5,6 +5,7 @@ tags:
   - Python
   - 基础
 archived: true
+description: "1) 自动类型转换(隐式) 对两种数据进行运算,往往先是小的类型->大的类型，之后再进行运算 注=>print(None == False) 此时结果为False，并不会自动转换(因为不是数值不能小变…"
 ---
 # DAY3
 ## 1.数据类型转换

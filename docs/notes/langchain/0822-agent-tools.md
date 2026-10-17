@@ -5,6 +5,7 @@ tags:
   - LangChain
   - Agent
 archived: false
+description: "Agent 与工具调用：JSON Schema 如何描述工具、ReAct 循环的执行过程，以及生产环境的轮数与危险操作控制。"
 ---
 ## Agent
 ### 将所有工具封装成json信息，在调用大模型时候传入所有JSON Schema

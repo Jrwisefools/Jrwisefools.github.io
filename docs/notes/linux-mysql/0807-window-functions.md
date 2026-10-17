@@ -5,6 +5,7 @@ tags:
   - MySQL
   - 数据库
 archived: true
+description: "有几条数据执行完还是几条 包括sum(),avg(),count(),max(),min() 把这些功能函数放进窗口函数后返回的数据就从单行变成多行"
 ---
 # Day 17
 ### 窗口函数

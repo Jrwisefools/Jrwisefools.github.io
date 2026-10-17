@@ -1,10 +1,12 @@
 <script setup>
 /**
- * 首页主组件：Hero 区 + 技能简介 + 最新文章 + 项目卡片 + 社交链接
+ * 首页主组件：Hero 区 + 双栏布局
+ *   左主栏：最新文章（卡片式）
+ *   右侧栏：关于我 / 技能标签 / 项目作品
  * 数据接口：
- *   - posts.data.js  → 自动聚合 docs/posts/*.md（frontmatter: title、date）
+ *   - posts.data.js  → 自动聚合 posts 与 notes 下未被归档的 md
  *   - projects 数组  → 在 ProjectCards.vue 内直接编辑
- *   - avatar         → 若 docs/public/avatar.jpg 存在则自动显示图片，否则显示名字徽标
+ *   - avatar         → 若 docs/public/avatar.jpg 存在则显示图片，否则显示名字徽标
  */
 import HeroAvatar from './HeroAvatar.vue'
 import HeroTypewriter from './HeroTypewriter.vue'
@@ -24,7 +26,7 @@ const githubUrl = 'https://github.com/Jrwisefools'
       <HeroTypewriter text="RAG & 后端开发学习者，记录笔记与项目点滴" />
       <div class="hero-actions">
         <a class="hero-btn primary" href="#latest-posts">看文章</a>
-        <a class="hero-btn" href="/about">关于我</a>
+        <a class="hero-btn" href="/notes/">全部笔记</a>
       </div>
       <a class="hero-github" :href="githubUrl" target="_blank" rel="noopener">
         <svg viewBox="0 0 16 16" width="18" height="18" fill="currentColor" aria-hidden="true">
@@ -34,22 +36,32 @@ const githubUrl = 'https://github.com/Jrwisefools'
       </a>
     </section>
 
-    <!-- 技能简介 -->
-    <section class="home-section intro-section">
-      <h2>关于我</h2>
-      <p class="intro-text">专注大模型应用方向：RAG 知识库构建、模型训练与推理部署，以及 FastAPI 后端服务开发。</p>
-      <div class="skill-tags">
-        <span v-for="s in skills" :key="s" class="skill-tag">{{ s }}</span>
-      </div>
-    </section>
+    <!-- 双栏主体 -->
+    <div class="home-columns">
+      <main class="home-main">
+        <PostList />
+        <div class="home-more">
+          <a href="/notes/">浏览全部笔记 →</a>
+        </div>
+      </main>
 
-    <!-- 最新文章 -->
-    <PostList />
+      <aside class="home-side">
+        <section class="side-block">
+          <h2>关于我</h2>
+          <p class="intro-text">
+            专注大模型应用方向：RAG 知识库构建、模型训练与推理部署，以及 FastAPI 后端服务开发。
+          </p>
+          <div class="skill-tags">
+            <span v-for="s in skills" :key="s" class="skill-tag">{{ s }}</span>
+          </div>
+          <a class="side-link" href="/about">了解更多 →</a>
+        </section>
 
-    <!-- 项目作品 -->
-    <section class="home-section projects-section">
-      <h2>项目作品</h2>
-      <ProjectCards />
-    </section>
+        <section class="side-block">
+          <h2>项目作品</h2>
+          <ProjectCards />
+        </section>
+      </aside>
+    </div>
   </div>
 </template>

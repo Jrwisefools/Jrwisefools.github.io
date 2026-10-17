@@ -5,6 +5,7 @@ tags:
   - Python
   - 并发
 archived: true
+description: "减少进程创建和销毁的次数 1.进程池创建"
 ---
 # Day11
 ### 自定义Process子类创建进程

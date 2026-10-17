@@ -5,6 +5,7 @@ tags:
   - MySQL
   - 数据库
 archived: true
+description: "概述 表A中的一条记录可以确定表B中的多条记录；表B中的一条记录可以确定表A中的一条记录。 比如 : 部门和员工、用户和订单 开发步骤 ①设计tb_dept和tb_employee的一对多关系 在多的…"
 ---
 ### 01-多表设计之一对多
 *   概述

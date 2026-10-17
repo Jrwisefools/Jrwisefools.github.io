@@ -4,6 +4,7 @@ date: 2025-08-20
 tags:
   - LangChain
 archived: false
+description: "LangChain 的定位、包结构与核心模块划分，以及 OpenAI 原生接口与 LangChain 两种调用模型的方式对比。"
 ---
 # LangChain
 ## LangChain是什么

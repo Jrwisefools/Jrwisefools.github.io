@@ -5,6 +5,7 @@ tags:
   - MySQL
   - 数据库
 archived: true
+description: "隔离级别 读取的是记录的最新版本,读取时还得保证其他并发事务不能修改当前记录 会对记录进行加锁 select * from stu lock in share mode(共享锁); 简单的select…"
 ---
 隔离级别
 ### 当前读

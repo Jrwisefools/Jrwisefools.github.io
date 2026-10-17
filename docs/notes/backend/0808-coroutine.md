@@ -5,6 +5,7 @@ tags:
   - Python
   - 并发
 archived: false
+description: "Python 协程笔记：协程与进程线程的对比、async/await 的挂起与恢复、事件循环的注册方式与工作流程。"
 ---
 # 协程
 

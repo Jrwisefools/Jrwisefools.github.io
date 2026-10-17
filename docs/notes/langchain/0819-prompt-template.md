@@ -5,6 +5,7 @@ tags:
   - LangChain
   - 提示词
 archived: false
+description: "ChatPromptTemplate 用法：模板变量与三种书写形式、管道串联模型、few-shot 示例与多轮历史消息注入。"
 ---
 ## 提示词模板
 提示词模板以字典作为输入

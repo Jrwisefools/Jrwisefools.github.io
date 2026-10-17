@@ -5,6 +5,7 @@ tags:
   - LangChain
   - API
 archived: false
+description: "区分 SDK 与 API 的关系，从原生 HTTP 调用讲到 OpenAI 兼容协议，含多轮对话实现与常用参数速记。"
 ---
 SDK:工具包
 API:接口统一规范

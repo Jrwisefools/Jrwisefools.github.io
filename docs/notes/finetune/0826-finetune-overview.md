@@ -5,6 +5,7 @@ tags:
   - 微调
   - 大模型
 archived: false
+description: "从大模型基本原理讲到落地路径：Transformer 结构与输入输出层、发展历史，以及提示词工程、微调、RAG 三种适配方式。"
 ---
 ## 大模型概述
 ### 大模型基本原理

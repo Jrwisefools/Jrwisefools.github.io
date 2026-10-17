@@ -48,9 +48,17 @@ export default defineConfig({
     nav: [
       { text: '首页', link: '/' },
       { text: '笔记', link: '/notes/' },
+      { text: '标签', link: '/tags' },
+      { text: '归档', link: '/archive' },
       { text: '关于', link: '/about' }
     ],
     socialLinks: [{ icon: 'github', link: 'https://github.com/Jrwisefools' }],
+
+    // 本地搜索。索引存原文、由客户端按 MiniSearch 默认规则（空格与标点）分词，
+    // 所以搜「协程」「LangGraph」这类短词有效，中文长句建议拆成关键词。
+    search: {
+      provider: 'local'
+    },
 
     sidebar: {
       '/notes/': [

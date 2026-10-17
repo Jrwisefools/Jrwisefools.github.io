@@ -4,6 +4,7 @@ date: 2025-07-31
 tags:
   - Linux
 archived: true
+description: "Linux 免费开源自由软件，可定制化更强，更加安全，软件开源免费 比windows更加稳定安全，有界面操作和完全的命令行操作 上手比windows门槛高一点点"
 ---
 # Day 12
 Linux 免费开源自由软件，可定制化更强，更加安全，软件开源免费  

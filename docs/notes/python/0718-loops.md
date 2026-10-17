@@ -5,6 +5,7 @@ tags:
   - Python
   - 基础
 archived: true
+description: "当表达式成立的时候进行循环，条件不成立才跳出循环 else当循环正常结束的时候才执行"
 ---
 # DAY 4
 ## 4.3.1 循环

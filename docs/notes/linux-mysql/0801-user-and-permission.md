@@ -4,6 +4,7 @@ date: 2025-08-01
 tags:
   - Linux
 archived: true
+description: "每个用户都有一个组 新建组:groupadd xtqj 删除组：groupdel xtqj 修改组：groupmod -n xtqj2 xtqj 给小新加入新的组 ：usermod -g 新组名 用户…"
 ---
 # Day 13
 ### 用户组管理命令

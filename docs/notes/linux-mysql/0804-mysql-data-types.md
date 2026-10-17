@@ -5,6 +5,7 @@ tags:
   - MySQL
   - 数据库
 archived: true
+description: "1.整数类型 TinyInt、SmallInt、MediumInt、Int、BigInt 修饰：unsigned无符号、zerofill零填充；MySQL8废弃int(M)显示宽度 2.浮点类型 单精…"
 ---
 # DAY 15
 

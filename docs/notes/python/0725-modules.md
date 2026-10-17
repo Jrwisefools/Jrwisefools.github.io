@@ -5,6 +5,7 @@ tags:
   - Python
   - 基础
 archived: true
+description: "模块不能和python中自带的标注模块重名 指定导入模块的部分成员，通过成员名的方式访问, from 模块名 import 成员名1[as 别名],成员2[as 别名] 导入模块中所有不易单下划线开头…"
 ---
 # Day9
 ## 模块

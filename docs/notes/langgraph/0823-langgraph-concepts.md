@@ -4,6 +4,7 @@ date: 2025-08-23
 tags:
   - LangGraph
 archived: false
+description: "LangGraph 三个核心概念——节点、边、状态。含最小可运行图、条件边与循环，以及与 LCEL 的选型对比。"
 ---
 # 第一章LangGraph
 ## 什么是LangGraph

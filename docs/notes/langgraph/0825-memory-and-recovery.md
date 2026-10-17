@@ -5,6 +5,7 @@ tags:
   - LangGraph
   - 记忆
 archived: false
+description: "短期记忆与长期记忆的分工、故障恢复与断点续传、获取历史状态，以及 LangGraph 节点执行与缓存机制。"
 ---
 # LangGraph
 短期记忆 :保存在内存中

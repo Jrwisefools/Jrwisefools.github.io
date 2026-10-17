@@ -1,10 +1,13 @@
 ---
-title: "FastAPI 快速入门"
+title: "FastAPI 与 SQLAlchemy ORM"
 date: 2025-08-10
 tags:
   - FastAPI
+  - SQLAlchemy
+  - ORM
   - Python
 archived: false
+description: "FastAPI 基础用法与 SQLAlchemy ORM：路由定义与 uvicorn 启动，ORM 的核心价值、核心层与对象关系映射组件。"
 ---
 # FastAPI
 fastapi底层就是由协程实现的,用于构建API，是建立在Starlette和Pydantic基础上

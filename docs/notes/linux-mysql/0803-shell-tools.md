@@ -5,6 +5,7 @@ tags:
   - Linux
   - Shell
 archived: true
+description: "1. cut 工作为“剪”类似split方法 从每一行切割字段切割输出 cut [选项参数] filename 选项 -f 列号 提取第几列 -d 分隔符 指定用什么分割,默认用制表符\t，只能是一共…"
 ---
 # Day14
 ## Shell 工具

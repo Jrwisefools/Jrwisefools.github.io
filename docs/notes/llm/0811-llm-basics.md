@@ -5,6 +5,7 @@ tags:
   - 大模型
   - LLM
 archived: false
+description: "大模型的定义与能力边界：为什么会出现大模型、参数规模与计量单位、按功能形态分类、训练范式与提示词工程。"
 ---
 ![img.png](/images/llm/img.png)
 大模型--->脑子

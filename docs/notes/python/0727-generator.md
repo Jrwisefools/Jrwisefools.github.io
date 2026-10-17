@@ -5,6 +5,7 @@ tags:
   - Python
   - 进阶
 archived: true
+description: "1. 当生成器使用yield语句时,把函数暂停 2. 将yield后的表达式作为当前迭代器的值返回 __yield 暂停并返回值__ __return 结束程序并返回值__ 3. 每次调用生成器的ne…"
 ---
 # Day 10
 ## 生成器
