@@ -19,12 +19,12 @@ const projects = [
   },
   {
     name: '经营归因分析系统',
-    desc: '', // AttributionsAnalysis：Gitee 未公开详情，待补充
+    desc: '面向企业经营的智能多维归因：FastAPI 模块化单体 + ARQ 异步任务 + PostgreSQL 16 数仓，支持差额 / LMDI / Shapley / What-If 拆解与统计检验',
     url: 'https://gitee.com/luzhongmilu/attribution-analysis'
   },
   {
-    name: '客服系统后端',
-    desc: '', // customer-service-backend：仓库私有（访问返回 403），待确认后补充
+    name: '电商客服系统后端',
+    desc: 'FastAPI + SQLAlchemy + MySQL + Docker：用户会话管理、消息收发、知识库问答等客服核心接口',
     url: 'https://gitee.com/luzhongmilu/customer-service-backend'
   }
 ]
