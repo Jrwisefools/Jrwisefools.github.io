@@ -6,8 +6,10 @@
 
 ## 联系方式
 
-- 邮箱：1460989187@qq.com
+- 邮箱：[1460989187@qq.com](mailto:1460989187@qq.com)
+- 手机：18370208373
 - Gitee：[luzhongmilu](https://gitee.com/luzhongmilu)
 - GitHub：[Jrwisefools](https://github.com/Jrwisefools)
+- 在线简历：整理中，敬请期待
 
 [← 返回首页](/)
