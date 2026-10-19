@@ -11,6 +11,7 @@ import { useRoute } from 'vitepress'
 import PostMeta from './PostMeta.vue'
 import ImageLightbox from './ImageLightbox.vue'
 import NavIdentity from './NavIdentity.vue'
+import SidebarToggle from './SidebarToggle.vue'
 import { setupCodeCopy } from './codeCopy.js'
 
 const { Layout } = DefaultTheme
@@ -27,6 +28,11 @@ watch(
   <Layout>
     <template #doc-before>
       <PostMeta />
+    </template>
+
+    <!-- 笔记侧栏收放开关（仅 /notes/ 下显示） -->
+    <template #nav-bar-content-before>
+      <SidebarToggle />
     </template>
 
     <!-- 导航栏右侧：头像 + 名字 -->

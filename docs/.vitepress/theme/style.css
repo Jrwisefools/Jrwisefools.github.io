@@ -536,6 +536,44 @@ body {
   margin: 0 8px 0 12px;
 }
 
+.sidebar-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  margin-right: 4px;
+  padding: 0;
+  border: 1px solid var(--c-border);
+  border-radius: var(--c-radius-pill);
+  background: var(--c-bg);
+  color: var(--c-text-3);
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s, background-color 0.2s;
+}
+
+.sidebar-toggle:hover {
+  color: var(--c-brand);
+  border-color: var(--c-brand-hover);
+  background: var(--c-accent-soft);
+}
+
+/* 窄屏走 VitePress 自带的 Menu，不需要这个开关 */
+@media (max-width: 959px) {
+  .sidebar-toggle {
+    display: none;
+  }
+}
+
+/* 收起状态：侧栏宽度归零，内容区顺势占满 */
+html.notes-sidebar-collapsed {
+  --vp-sidebar-width: 0px;
+}
+
+html.notes-sidebar-collapsed .VPSidebar {
+  display: none;
+}
+
 .avatar-block {
   display: flex;
   align-items: center;
