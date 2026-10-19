@@ -74,7 +74,8 @@ const stats = computed(() => [
       </main>
 
       <aside class="home-side">
-        <section class="side-block">
+        <!-- 无框区块：这段文字是阅读式内容，不需要盒子包起来 -->
+        <section class="side-block side-plain">
           <h2>关于我</h2>
           <p class="intro-text">
             专注大模型应用方向：RAG 知识库构建、模型训练与推理部署，以及 FastAPI 后端服务开发。
@@ -85,7 +86,8 @@ const stats = computed(() => [
           <a class="side-link" href="/about">了解更多 →</a>
         </section>
 
-        <section class="side-block">
+        <!-- 无框区块：项目卡本身就是盒子，外层再包一层会变成盒子套盒子 -->
+        <section class="side-block side-plain">
           <h2>项目作品</h2>
           <ProjectCards />
         </section>
