@@ -5,12 +5,13 @@
  */
 
 :root {
-  --c-bg: #f8fbff;
-  --c-surface: #eef4fa;
-  --c-card: #e8f0f8;
-  --c-tag: #e0eaf5;
-  --c-border: #d0dce8;
-  --c-divider: #e0eaf5;
+  --c-bg: #f7fafd;
+  --c-surface: #ffffff;
+  /* 卡片用纯白：底色是淡蓝调，卡片若也偏蓝会与背景糊在一起 */
+  --c-card: #ffffff;
+  --c-tag: #eef4fa;
+  --c-border: #dfebf5;
+  --c-divider: #e9f1f8;
   --c-text-1: #2c4a6e;
   --c-text-2: #3a5f8a;
   --c-text-3: #517695;
@@ -20,11 +21,12 @@
   --c-btn-text: #ffffff;
 
   /* 视觉基底：阴影 / 圆角 / 强调底色 / 缓动 */
-  --c-shadow-sm: 0 1px 2px rgba(44, 95, 138, 0.05), 0 2px 10px rgba(44, 95, 138, 0.07);
-  --c-shadow-md: 0 6px 20px rgba(44, 95, 138, 0.14);
-  --c-radius-card: 12px;
+  /* 白卡 + 描边已经足够成形，阴影只做极轻的一层 */
+  --c-shadow-sm: 0 1px 2px rgba(31, 64, 94, 0.04);
+  --c-shadow-md: 0 4px 14px rgba(31, 64, 94, 0.09);
+  --c-radius-card: 10px;
   --c-radius-pill: 999px;
-  --c-accent-soft: rgba(44, 95, 138, 0.08);
+  --c-accent-soft: rgba(44, 95, 138, 0.07);
   --c-glow: rgba(44, 95, 138, 0.13);
   --c-glow-fade: rgba(44, 95, 138, 0);
   --c-ease: cubic-bezier(0.4, 0, 0.2, 1);
@@ -44,11 +46,12 @@
 }
 
 .dark {
-  --c-bg: #131a24;
-  --c-surface: #1a222e;
-  --c-card: #1c2531;
-  --c-tag: #23303f;
-  --c-border: #2b3644;
+  --c-bg: #111823;
+  --c-surface: #16202b;
+  /* 深色下卡片比背景亮一档，才有"浮起来"的层次 */
+  --c-card: #1a232f;
+  --c-tag: #212d3b;
+  --c-border: #2a3745;
   --c-divider: #232e3b;
   --c-text-1: #dbe4ee;
   --c-text-2: #b3c4d6;
@@ -58,9 +61,9 @@
   --c-brand-hover: #9dc8ec;
   --c-btn-text: #0f1620;
 
-  --c-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4), 0 2px 10px rgba(0, 0, 0, 0.32);
-  --c-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.5);
-  --c-radius-card: 12px;
+  --c-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --c-shadow-md: 0 4px 16px rgba(0, 0, 0, 0.42);
+  --c-radius-card: 10px;
   --c-radius-pill: 999px;
   --c-accent-soft: rgba(124, 176, 220, 0.12);
   --c-glow: rgba(124, 176, 220, 0.15);
@@ -391,39 +394,20 @@ body {
 }
 
 .post-card {
-  position: relative;
-  overflow: hidden;
-  padding: 20px 24px;
+  padding: 18px 22px 20px;
   border-radius: var(--c-radius-card);
   background: var(--c-card);
   border: 1px solid var(--c-border);
   box-shadow: var(--c-shadow-sm);
-  transition: transform 0.3s var(--c-ease), box-shadow 0.3s var(--c-ease),
-    border-color 0.3s var(--c-ease);
+  transition: transform 0.25s var(--c-ease), box-shadow 0.25s var(--c-ease),
+    border-color 0.25s var(--c-ease);
 }
 
-/* 左侧强调条：悬停时自上而下展开 */
-.post-card::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 3px;
-  background: var(--c-brand);
-  transform: scaleY(0);
-  transform-origin: top;
-  transition: transform 0.3s var(--c-ease);
-}
-
+/* 悬停反馈保持单一连贯：抬起 + 描边转强调色，不再叠加左侧色条 */
 .post-card:hover {
-  transform: translateY(-3px);
+  transform: translateY(-2px);
   box-shadow: var(--c-shadow-md);
   border-color: var(--c-brand-hover);
-}
-
-.post-card:hover::before {
-  transform: scaleY(1);
 }
 
 .post-card-title {
@@ -473,12 +457,12 @@ body {
   flex-wrap: wrap;
 }
 
+/* 白底卡片里，日期胶囊底色的存在感过强，改为轻量文字 + 字距 */
 .post-date {
-  padding: 3px 10px;
-  border-radius: var(--c-radius-pill);
-  background: var(--c-accent-soft);
-  color: var(--c-text-3);
-  font-size: 0.8rem;
+  color: var(--c-text-4);
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
 }
 
 .home-more {
