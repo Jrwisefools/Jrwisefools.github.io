@@ -359,6 +359,24 @@ body {
 }
 
 /* 头像 */
+/* 导航右侧排序：默认 DOM 顺序是 …更多(三点) → 头像 → 汉堡，
+   这里用 order 把头像提到三点之前，并留出与相邻图标的间距。 */
+.VPNavBar .content-body > .nav-identity {
+  order: 1;
+}
+
+.VPNavBar .content-body > .VPNavBarExtra {
+  order: 2;
+}
+
+.VPNavBar .content-body > .VPNavBarHamburger {
+  order: 3;
+}
+
+.nav-identity {
+  margin: 0 8px 0 12px;
+}
+
 .avatar-block {
   display: flex;
   align-items: center;
