@@ -1,6 +1,10 @@
 ---
 title: 笔记总览
 date: 2026-10-17
+# 保留主题侧栏方便跳转，但关掉右侧大纲与上下篇翻页（索引页不需要）
+aside: false
+prev: false
+next: false
 ---
 
 # 笔记总览
