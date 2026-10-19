@@ -19,11 +19,14 @@ const githubUrl = 'https://github.com/Jrwisefools'
 
 <template>
   <div class="home-wrap">
-    <!-- Hero 区 -->
+    <!-- Hero 区：杂志式左对齐 -->
     <section class="hero-section">
-      <HeroAvatar name="蒋璐新" src="/avatar.jpg" />
-      <h1>蒋璐新</h1>
-      <HeroTypewriter text="RAG & 后端开发学习者，记录笔记与项目点滴" />
+      <div class="hero-identity">
+        <HeroAvatar name="蒋璐新" src="/avatar.jpg" />
+        <span class="hero-name">蒋璐新</span>
+      </div>
+      <h1 class="hero-title">RAG &amp; 后端开发学习者</h1>
+      <HeroTypewriter text="记录笔记与项目点滴" />
       <div class="hero-actions">
         <a class="hero-btn primary" href="#latest-posts">看文章</a>
         <a class="hero-btn" href="/notes/">全部笔记</a>
