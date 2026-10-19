@@ -73,9 +73,11 @@ export default defineConfig({
     },
 
     sidebar: {
-      '/notes/': [
-        { text: '笔记总览', link: '/notes/' },
-        ...TOPIC_GROUPS.map((g) => ({ text: g.text, items: itemsOf(g.dir) })),
+    '/notes/': [
+      { text: '笔记总览', link: '/notes/' },
+      // collapsed 必须显式给出才会渲染折叠箭头（VitePress 判空决定是否可折叠）；
+      // false = 默认展开但可手动收起
+      ...TOPIC_GROUPS.map((g) => ({ text: g.text, collapsed: false, items: itemsOf(g.dir) })),
         {
           text: '基础课归档',
           collapsed: true,
