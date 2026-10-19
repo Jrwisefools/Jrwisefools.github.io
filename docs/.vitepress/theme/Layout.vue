@@ -12,6 +12,7 @@ import PostMeta from './PostMeta.vue'
 import ImageLightbox from './ImageLightbox.vue'
 import NavIdentity from './NavIdentity.vue'
 import SidebarToggle from './SidebarToggle.vue'
+import NavMascot from './NavMascot.vue'
 import { setupCodeCopy } from './codeCopy.js'
 
 const { Layout } = DefaultTheme
@@ -30,12 +31,15 @@ watch(
       <PostMeta />
     </template>
 
-    <!-- 笔记侧栏收放开关（仅 /notes/ 下显示） -->
+    <!-- 导航栏最左侧：主题吉祥物（点击回首页）+ 侧栏收放开关。
+         吉祥物不用 nav-bar-title-before：那个插槽在 <a class="title"> 内部，
+         再放一个链接会形成嵌套 <a>，HTML 不合法。这里改用绝对定位摆到左端。 -->
     <template #nav-bar-content-before>
+      <NavMascot />
       <SidebarToggle />
     </template>
 
-    <!-- 导航栏右侧：头像 + 名字 -->
+    <!-- 导航栏右侧：头像 + 名字，点击去关于页 -->
     <template #nav-bar-content-after>
       <NavIdentity />
     </template>

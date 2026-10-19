@@ -13,7 +13,7 @@ const name = computed(() => theme.value.siteTitle || site.value.title)
 </script>
 
 <template>
-  <a class="nav-identity" href="/" :aria-label="`${name} 的主页`">
+  <a class="nav-identity" href="/about" :aria-label="`关于${name}`" title="关于我">
     <HeroAvatar :name="name" src="/avatar.jpg" />
     <span class="nav-identity-name">{{ name }}</span>
   </a>

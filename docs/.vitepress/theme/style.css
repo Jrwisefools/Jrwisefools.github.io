@@ -532,6 +532,54 @@ body {
   order: 3;
 }
 
+/* 导航栏左上角主题吉祥物（点击回首页）。
+   用绝对定位摆到容器左端：DOM 上它在 content-body 里，
+   直接放会因为 justify-content: flex-end 被推到右侧。 */
+.VPNavBar .container {
+  position: relative;
+}
+
+.nav-mascot {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  z-index: 1;
+}
+
+.nav-mascot img {
+  width: 30px;
+  height: auto;
+  display: block;
+  transition: transform 0.25s var(--c-ease);
+}
+
+.nav-mascot:hover img,
+.nav-mascot:focus-visible img {
+  transform: scale(1.18);
+}
+
+/* 窄屏导航已很挤，收掉装饰 */
+@media (max-width: 767px) {
+  .nav-mascot {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-mascot img {
+    transition: none;
+  }
+
+  .nav-mascot:hover img,
+  .nav-mascot:focus-visible img {
+    transform: none;
+  }
+}
+
 .nav-identity {
   margin: 0 8px 0 12px;
 }
