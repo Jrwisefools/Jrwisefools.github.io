@@ -1,15 +1,15 @@
 <script setup>
 /**
- * 导航栏右侧身份标识：小头像 + 名字
+ * 导航栏右侧身份标识：小头像 + 作者名
  * 头像来自 docs/public/avatar.jpg（由 HeroAvatar 探测），缺失时回退为名字徽标。
  * 窄屏只保留头像，避免挤压导航项。
+ *
+ * 注意：这里必须是「作者名」，不能图省事用 theme.siteTitle——站点名会随
+ * 品牌调整（且比名字长），拿它当作者名会出现导航栏左右两侧文字重复。
  */
-import { useData } from 'vitepress'
 import HeroAvatar from './HeroAvatar.vue'
-import { computed } from 'vue'
 
-const { theme, site } = useData()
-const name = computed(() => theme.value.siteTitle || site.value.title)
+const name = '蒋璐新'
 </script>
 
 <template>

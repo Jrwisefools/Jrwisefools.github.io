@@ -42,16 +42,17 @@ function itemsOf(dir) {
 }
 
 export default defineConfig({
-  title: '蒋璐新',
-  description: '蒋璐新的个人博客',
+  // 浏览器标签页与 SEO 标题（各页面标签为「页面名 | 蒋璐新的博客」）
+  title: '蒋璐新的博客',
+  description: '蒋璐新的博客：RAG、大模型应用与 FastAPI 后端的学习笔记',
 
   // 浏览器标签页图标用主题鲨鱼（64px 缩放版；原图 theme-shark.png 仅导航栏用）
   head: [['link', { rel: 'icon', href: '/favicon.png' }]],
 
   themeConfig: {
-    // 导航栏左上角显示「蒋璐新的个人博客」（与右上角的头像 + 名字区分开：
+    // 导航栏左上角显示站点名（与右上角的头像 + 作者名「蒋璐新」区分开：
     // 那个是作者身份，这个是站点名）
-    siteTitle: '蒋璐新的个人博客',
+    siteTitle: '蒋璐新的博客',
     nav: [
       { text: '首页', link: '/' },
       { text: '笔记', link: '/notes/' },

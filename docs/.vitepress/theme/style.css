@@ -580,6 +580,23 @@ body {
   html.notes-sidebar-collapsed .VPSidebar {
     display: none;
   }
+
+  /* 收起时把标题区恢复成普通流。
+     带侧栏的页面上，标题默认是 position:absolute + width:var(--vp-sidebar-width)：
+     侧栏一收起，标题框塌成 0 宽，但吉祥物和站名仍渲染在左端，而内容区
+     padding-left 也归零 → 搜索框等内容滑到标题底下互相重叠，开关被挤到
+     最左端压在吉祥物身上。恢复普通流后内容区从标题之后开始，两层各自归位；
+     开关始终跟在标题右侧，展开/收起只位移约 30px，不跳位。
+     注意 has-sidebar 类是 VitePress 客户端挂载后才加到 .VPNavBar 上的，
+     选择器必须带上它才命中真实布局。 */
+  html.notes-sidebar-collapsed .VPNavBar.has-sidebar .title {
+    position: static;
+    width: auto;
+  }
+
+  html.notes-sidebar-collapsed .VPNavBar.has-sidebar .content {
+    padding-left: 0;
+  }
 }
 
 .nav-identity {
@@ -597,6 +614,7 @@ body {
   /* content-body 是 justify-content:flex-end，auto 右外边距把自己推到左端，
      紧贴标题右侧，既不被吉祥物压住也不和搜索图标挤在一起 */
   margin-right: auto;
+  flex-shrink: 0;
   border: 1px solid var(--c-border);
   border-radius: var(--c-radius-pill);
   background: var(--c-bg);
@@ -619,13 +637,9 @@ body {
 }
 
 /* 收起状态：侧栏宽度归零，内容区顺势占满 */
-html.notes-sidebar-collapsed {
-  --vp-sidebar-width: 0px;
-}
-
-html.notes-sidebar-collapsed .VPSidebar {
-  display: none;
-}
+/* 窄屏 <960px 的收起规则已并入上面的 @media (min-width: 960px) 块：
+   这里若再写一份不带媒体查询的 .VPSidebar{display:none}，会把窄屏抽屉
+   里的侧栏一起藏掉，Menu 点开就是空面板。 */
 
 .avatar-block {
   display: flex;
