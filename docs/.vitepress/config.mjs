@@ -44,9 +44,14 @@ function itemsOf(dir) {
 export default defineConfig({
   title: '蒋璐新',
   description: '蒋璐新的个人博客',
+
+  // 浏览器标签页图标用主题鲨鱼（64px 缩放版；原图 theme-shark.png 仅导航栏用）
+  head: [['link', { rel: 'icon', href: '/favicon.png' }]],
+
   themeConfig: {
-    // 名字与头像已移到导航栏右侧（NavIdentity.vue），此处不再显示站点名
-    siteTitle: false,
+    // 导航栏左上角显示「蒋璐新的个人博客」（与右上角的头像 + 名字区分开：
+    // 那个是作者身份，这个是站点名）
+    siteTitle: '蒋璐新的个人博客',
     nav: [
       { text: '首页', link: '/' },
       { text: '笔记', link: '/notes/' },

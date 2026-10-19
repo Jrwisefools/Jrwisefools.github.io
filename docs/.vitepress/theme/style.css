@@ -532,26 +532,16 @@ body {
   order: 3;
 }
 
-/* 导航栏左上角主题吉祥物（点击回首页）。
-   用绝对定位摆到容器左端：DOM 上它在 content-body 里，
-   直接放会因为 justify-content: flex-end 被推到右侧。 */
-.VPNavBar .container {
-  position: relative;
-}
-
+/* 导航栏左上角主题吉祥物：随站点标题并排，点击命中标题锚点回首页 */
 .nav-mascot {
-  position: absolute;
-  left: 12px;
-  top: 50%;
-  transform: translateY(-50%);
   display: inline-flex;
   align-items: center;
-  text-decoration: none;
-  z-index: 1;
+  margin-right: 10px;
+  flex-shrink: 0;
 }
 
 .nav-mascot img {
-  width: 30px;
+  width: 40px;
   height: auto;
   display: block;
   transition: transform 0.25s var(--c-ease);
@@ -559,7 +549,7 @@ body {
 
 .nav-mascot:hover img,
 .nav-mascot:focus-visible img {
-  transform: scale(1.18);
+  transform: scale(1.15);
 }
 
 /* 窄屏导航已很挤，收掉装饰 */
@@ -580,6 +570,18 @@ body {
   }
 }
 
+/* 收起状态只在桌面宽度生效：窄屏下侧栏是抽屉，一旦 display:none，
+   Menu 按钮打开的就是空面板，表现为 menu 失效。 */
+@media (min-width: 960px) {
+  html.notes-sidebar-collapsed {
+    --vp-sidebar-width: 0px;
+  }
+
+  html.notes-sidebar-collapsed .VPSidebar {
+    display: none;
+  }
+}
+
 .nav-identity {
   margin: 0 8px 0 12px;
 }
@@ -592,6 +594,9 @@ body {
   height: 32px;
   margin-right: 4px;
   padding: 0;
+  /* content-body 是 justify-content:flex-end，auto 右外边距把自己推到左端，
+     紧贴标题右侧，既不被吉祥物压住也不和搜索图标挤在一起 */
+  margin-right: auto;
   border: 1px solid var(--c-border);
   border-radius: var(--c-radius-pill);
   background: var(--c-bg);

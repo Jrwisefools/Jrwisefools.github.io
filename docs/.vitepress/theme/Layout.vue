@@ -31,11 +31,14 @@ watch(
       <PostMeta />
     </template>
 
-    <!-- 导航栏最左侧：主题吉祥物（点击回首页）+ 侧栏收放开关。
-         吉祥物不用 nav-bar-title-before：那个插槽在 <a class="title"> 内部，
-         再放一个链接会形成嵌套 <a>，HTML 不合法。这里改用绝对定位摆到左端。 -->
-    <template #nav-bar-content-before>
+    <!-- 导航栏左上角：主题吉祥物 + 站点标题（点击区域即标题锚点，回首页）。
+         鲨鱼不做成链接，避免在 <a class="title"> 内形成嵌套 <a>。 -->
+    <template #nav-bar-title-before>
       <NavMascot />
+    </template>
+
+    <!-- 侧栏收放开关（仅 /notes/ 下显示），靠 margin-right:auto 贴到内容区左端 -->
+    <template #nav-bar-content-before>
       <SidebarToggle />
     </template>
 
