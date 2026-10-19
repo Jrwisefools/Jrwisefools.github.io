@@ -45,6 +45,8 @@ export default defineConfig({
   title: '蒋璐新',
   description: '蒋璐新的个人博客',
   themeConfig: {
+    // 名字与头像已移到导航栏右侧（NavIdentity.vue），此处不再显示站点名
+    siteTitle: false,
     nav: [
       { text: '首页', link: '/' },
       { text: '笔记', link: '/notes/' },

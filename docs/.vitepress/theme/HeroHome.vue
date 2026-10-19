@@ -8,7 +8,6 @@
  *   - projects 数组  → 在 ProjectCards.vue 内直接编辑
  *   - avatar         → 若 docs/public/avatar.jpg 存在则显示图片，否则显示名字徽标
  */
-import HeroAvatar from './HeroAvatar.vue'
 import HeroTypewriter from './HeroTypewriter.vue'
 import PostList from './PostList.vue'
 import ProjectCards from './ProjectCards.vue'
@@ -21,10 +20,6 @@ const githubUrl = 'https://github.com/Jrwisefools'
   <div class="home-wrap">
     <!-- Hero 区：杂志式左对齐 -->
     <section class="hero-section">
-      <div class="hero-identity">
-        <HeroAvatar name="蒋璐新" src="/avatar.jpg" />
-        <span class="hero-name">蒋璐新</span>
-      </div>
       <h1 class="hero-title">RAG &amp; 后端开发学习者</h1>
       <HeroTypewriter text="记录笔记与项目点滴" />
       <div class="hero-actions">

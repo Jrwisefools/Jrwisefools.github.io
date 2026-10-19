@@ -10,6 +10,7 @@ import { onMounted, nextTick, watch } from 'vue'
 import { useRoute } from 'vitepress'
 import PostMeta from './PostMeta.vue'
 import ImageLightbox from './ImageLightbox.vue'
+import NavIdentity from './NavIdentity.vue'
 import { setupCodeCopy } from './codeCopy.js'
 
 const { Layout } = DefaultTheme
@@ -26,6 +27,11 @@ watch(
   <Layout>
     <template #doc-before>
       <PostMeta />
+    </template>
+
+    <!-- 导航栏右侧：头像 + 名字 -->
+    <template #nav-bar-content-after>
+      <NavIdentity />
     </template>
 
     <template #layout-bottom>
