@@ -6,16 +6,7 @@
  */
 import { data } from './posts.data.js'
 import { tagLink } from './tagLink.js'
-
-const formatDate = (d) => {
-  if (d == null) return ''
-  const date = new Date(d)
-  if (Number.isNaN(date.getTime())) return String(d)
-  const y = date.getFullYear()
-  const m = String(date.getMonth() + 1).padStart(2, '0')
-  const day = String(date.getDate()).padStart(2, '0')
-  return `${y}-${m}-${day}`
-}
+import { formatDate } from './formatDate.js'
 </script>
 
 <template>
@@ -24,7 +15,8 @@ const formatDate = (d) => {
     <ul v-if="data.length" class="post-cards">
       <li v-for="post in data" :key="post.url" class="post-card">
         <a class="post-card-title" :href="post.url">
-          {{ post.frontmatter.title || '(未命名文章)' }}
+          <span>{{ post.frontmatter.title || '(未命名文章)' }}</span>
+          <span class="post-card-arrow" aria-hidden="true">→</span>
         </a>
         <p v-if="post.frontmatter.description" class="post-card-desc">
           {{ post.frontmatter.description }}
