@@ -147,8 +147,8 @@ prompt = ChatPromptTemplate.from_messages([
 ])
 
 history = [
-    ("human", "我叫蒋璐新"),
-    ("ai", "你好，蒋璐新")
+    ("human", "我叫路中麋鹿"),
+    ("ai", "你好，路中麋鹿")
 ]
 
 prompt.invoke({"history": history, "input": "我叫什么？"})

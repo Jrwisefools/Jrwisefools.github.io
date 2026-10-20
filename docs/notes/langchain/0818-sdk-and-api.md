@@ -91,7 +91,7 @@ def chat(user_input: str) -> str:
     history.append({"role": "assistant", "content": answer})  # 回写历史
     return answer
 
-chat("我叫蒋璐新")
+chat("我叫路中麋鹿")
 chat("我叫什么？")   # 能答对，因为上一轮历史被回传了
 ```
 

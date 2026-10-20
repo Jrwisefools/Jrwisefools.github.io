@@ -5,7 +5,7 @@
  *
  * 注意：图片必须由 SSR 直接输出，不能改成监听 afterMount 再插入 ——
  * 否则在 JS 未就绪时只会显示名字徽标，而导航里并存的名字文字会出现
- * 「蒋璐新 蒋璐新」的重复。这里用 @error 回退，不依赖 JS。
+ * 「路中麋鹿 路中麋鹿」的重复。这里用 @error 回退，不依赖 JS。
  */
 import { ref } from 'vue'
 import { withBase } from 'vitepress'

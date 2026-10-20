@@ -9,7 +9,7 @@
  */
 import HeroAvatar from './HeroAvatar.vue'
 
-const name = '蒋璐新'
+const name = '路中麋鹿'
 </script>
 
 <template>

@@ -1364,3 +1364,39 @@ body.lb-open {
     padding: 20px;
   }
 }
+
+/* ===== 关于页联系方式折叠块 =====
+   手机号与邮箱属于隐私信息，不放正文显眼处：整块移到页面最底部并默认收起，
+   需要的人点一下就能看到。details 里是显式 HTML（markdown-it 不解析
+   HTML 块内的 markdown 语法），所以列表要手写 ul/li。 */
+.contact-fold {
+  margin-top: 8px;
+  border: 1px solid var(--c-divider);
+  border-radius: var(--c-radius-card);
+  background: var(--c-surface);
+}
+
+.contact-fold > summary {
+  padding: 12px 16px;
+  font-weight: 600;
+  color: var(--c-text-2);
+  cursor: pointer;
+  user-select: none;
+}
+
+.contact-fold > summary:hover {
+  color: var(--c-brand);
+}
+
+.contact-fold[open] > summary {
+  border-bottom: 1px solid var(--c-divider);
+}
+
+.contact-fold > ul {
+  margin: 0;
+  padding: 12px 16px 14px 36px;
+}
+
+.contact-fold > ul li {
+  margin: 6px 0;
+}
