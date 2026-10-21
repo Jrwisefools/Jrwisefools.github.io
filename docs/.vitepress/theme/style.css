@@ -31,6 +31,20 @@
   --c-glow-fade: rgba(44, 95, 138, 0);
   --c-ease: cubic-bezier(0.4, 0, 0.2, 1);
 
+  /* 排版梯度：高级感主要来自字号 / 行高 / 字距的层次对比。
+     组件一律引用这些变量、不写死数值，调排版只改这里。 */
+  --c-fs-hero: clamp(2.4rem, 5.6vw, 3.5rem); /* 38 → 56px */
+  --c-lh-hero: 1.14;
+  --c-ls-hero: -0.022em; /* 大字要收紧字距才不松散 */
+  --c-fs-h2: 1.05rem;
+  --c-fs-body: 1rem;
+  --c-lh-body: 1.8; /* 中文正文比英文需要更松的行高 */
+  --c-fs-meta: 0.8125rem;
+  --c-ls-meta: 0.045em;
+  --c-fs-index: 0.8125rem;
+  --c-fw-title: 700;
+  --c-fw-h2: 600;
+
   --vp-c-bg: var(--c-bg);
   --vp-c-bg-soft: var(--c-bg);
   --vp-c-bg-elv: var(--c-bg);
@@ -172,11 +186,41 @@ body {
   }
 }
 
-/* Hero 区 */
+/* Hero 区
+   网格：左上文字 + 右侧吉祥物，数据条横跨底部独占一行。
+   留白节奏刻意不均匀——标题上方紧、下方松，让视线先落在标题上。 */
 .hero-section {
   position: relative;
-  padding: 72px 0 40px;
+  padding: 88px 0 48px;
   text-align: left;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    'text mascot'
+    'stats stats';
+  gap: 40px 48px;
+  align-items: center;
+}
+
+.hero-text {
+  grid-area: text;
+  min-width: 0;
+}
+
+/* 吉祥物锚点：图片本身不抢戏，只做品牌记忆点 */
+.hero-mascot {
+  grid-area: mascot;
+  width: 200px;
+  max-width: 22vw;
+  justify-self: end;
+  pointer-events: none;
+}
+
+.hero-mascot img {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 8px 20px rgba(31, 64, 94, 0.12));
 }
 
 /* 右上角柔和光晕，给 Hero 一个视觉重心 */
@@ -222,25 +266,46 @@ body {
 
 /* 杂志式大标题 */
 .hero-title {
-  font-size: clamp(2.1rem, 5vw, 3.2rem);
-  font-weight: 700;
-  line-height: 1.18;
+  font-size: var(--c-fs-hero);
+  font-weight: var(--c-fw-title);
+  line-height: var(--c-lh-hero);
+  letter-spacing: var(--c-ls-hero);
   color: var(--c-text-1);
-  margin: 20px 0 10px;
+  margin: 18px 0 0;
 }
 
-.hero-typewriter {
-  font-size: 1.1rem;
-  color: var(--c-text-3);
+/* 副标题：一行说清，不用打字机——光标闪烁属于炫技效果，会把档次拉低 */
+.hero-sub {
+  margin: 18px 0 0;
+  font-size: 1.05rem;
   font-weight: 300;
-  min-height: 1.6em;
+  line-height: 1.7;
+  color: var(--c-text-3);
 }
 
 .hero-actions {
-  margin-top: 32px;
+  margin-top: 40px;
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
+  align-items: center;
+  gap: 24px;
+}
+
+/* 次要入口用文字链而不是第二个按钮：盒子越少越干净 */
+.hero-text-link {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.95rem;
+  color: var(--c-text-2);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 2px;
+  transition: color 0.2s var(--c-ease), border-color 0.2s var(--c-ease);
+}
+
+.hero-text-link:hover {
+  color: var(--c-brand);
+  border-bottom-color: var(--c-brand);
 }
 
 .hero-btn {
@@ -286,6 +351,21 @@ body {
   margin-left: 4px;
 }
 
+/* 窄屏：吉祥物让位给文字，导航栏里还有一只，不算丢失品牌锚点 */
+@media (max-width: 720px) {
+  .hero-section {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      'text'
+      'stats';
+    padding: 64px 0 40px;
+  }
+
+  .hero-mascot {
+    display: none;
+  }
+}
+
 .hero-social-btn {
   display: inline-flex;
   align-items: center;
@@ -307,47 +387,50 @@ body {
   box-shadow: var(--c-shadow-sm);
 }
 
-/* 数据概览条 */
+/* 数据条：降级为一条细线下的小字，不再和标题抢视觉重心 */
 .hero-stats {
+  grid-area: stats;
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
-  gap: 8px;
-  margin-top: 40px;
-  padding-top: 24px;
+  align-items: baseline;
+  gap: 8px 0;
+  margin-top: 8px;
+  padding-top: 20px;
   border-top: 1px solid var(--c-divider);
 }
 
 .hero-stat {
   display: flex;
   align-items: baseline;
-  gap: 6px;
-  padding: 8px 22px 8px 0;
-  margin-right: 14px;
+  gap: 7px;
+  padding: 0 28px 0 0;
+  margin-right: 20px;
   text-decoration: none;
   color: inherit;
-  transition: transform 0.25s var(--c-ease);
-}
-
-.hero-stat:hover {
-  transform: translateY(-2px);
 }
 
 .hero-stat strong {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--c-brand);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--c-text-1);
   line-height: 1;
+  font-variant-numeric: tabular-nums;
+  transition: color 0.2s var(--c-ease);
 }
 
 .hero-stat span {
-  font-size: 0.85rem;
-  color: var(--c-text-3);
+  font-size: var(--c-fs-meta);
+  letter-spacing: var(--c-ls-meta);
+  color: var(--c-text-4);
+  transition: color 0.2s var(--c-ease);
 }
 
-.hero-stat:hover strong,
+.hero-stat:hover strong {
+  color: var(--c-brand);
+}
+
 .hero-stat:hover span {
-  color: var(--c-brand-hover);
+  color: var(--c-text-2);
 }
 
 /* 区块通用 */
@@ -355,11 +438,13 @@ body {
   padding: 0 0 8px;
 }
 
+/* 区块标题＝杂志栏目标签：比正文略大、加字距、降一级明度，不与文章标题抢 */
 .home-section h2 {
-  font-size: 1.3rem;
-  font-weight: 600;
-  color: var(--c-text-1);
-  margin-bottom: 16px;
+  font-size: var(--c-fs-h2);
+  font-weight: var(--c-fw-h2);
+  color: var(--c-text-2);
+  letter-spacing: var(--c-ls-meta);
+  margin-bottom: 18px;
 }
 
 .intro-text {
@@ -384,8 +469,8 @@ body {
   color: var(--c-text-3);
 }
 
-/* 文章列表不再是盒子：标题才是主角，只用极细分隔线组织节奏。
-   悬停时用一层很淡的底色做暗示（负外边距让底色向外溢出一点，避免像贴在框里） */
+/* 文章列表＝杂志目录：序号 + 标题 + 右对齐日期，靠细分隔线组织节奏。
+   不用盒子、不铺悬停底色——悬停只让标题转品牌色、序号提亮，克制才高级。 */
 .post-cards {
   list-style: none;
   display: block;
@@ -394,51 +479,47 @@ body {
 }
 
 .post-card {
-  padding: 18px 16px;
-  margin: 0 -16px;
+  display: grid;
+  grid-template-columns: 2.75rem minmax(0, 1fr) auto;
+  gap: 0 24px;
+  align-items: baseline;
+  padding: 24px 0;
   border-bottom: 1px solid var(--c-divider);
-  border-radius: var(--c-radius-card);
-  transition: background-color 0.25s var(--c-ease);
 }
 
 .post-card:last-child {
   border-bottom: none;
 }
 
-.post-card:hover {
-  background: var(--c-accent-soft);
+/* 序号用等宽字体 + 等宽数字，保证 01 / 02 竖向对齐 */
+.post-index {
+  font-family: var(--vp-font-family-mono, ui-monospace, monospace);
+  font-size: var(--c-fs-index);
+  color: var(--c-text-4);
+  letter-spacing: var(--c-ls-meta);
+  font-variant-numeric: tabular-nums;
+  transition: color 0.2s var(--c-ease);
+}
+
+.post-card:hover .post-index {
+  color: var(--c-brand);
+}
+
+.post-body {
+  min-width: 0;
 }
 
 .post-card-title {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 16px;
-  font-size: 1.1rem;
+  display: block;
+  font-size: 1.08rem;
   font-weight: 600;
   line-height: 1.5;
   color: var(--c-text-1);
   text-decoration: none;
-  margin-bottom: 8px;
+  transition: color 0.2s var(--c-ease);
 }
 
-.post-card-title:hover {
-  color: var(--c-brand);
-}
-
-/* 卡片右上角箭头 */
-.post-card-arrow {
-  flex-shrink: 0;
-  font-size: 1rem;
-  color: var(--c-text-4);
-  opacity: 0;
-  transform: translateX(-6px);
-  transition: opacity 0.3s var(--c-ease), transform 0.3s var(--c-ease), color 0.3s;
-}
-
-.post-card:hover .post-card-arrow {
-  opacity: 1;
-  transform: translateX(0);
+.post-card:hover .post-card-title {
   color: var(--c-brand);
 }
 
@@ -446,22 +527,45 @@ body {
   font-size: 0.9rem;
   line-height: 1.7;
   color: var(--c-text-3);
-  margin: 0 0 14px;
+  margin: 6px 0 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
+/* 元信息右对齐，与左侧标题形成目录的两端对齐 */
 .post-card-meta {
   display: flex;
-  align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  white-space: nowrap;
 }
 
-/* 白底卡片里，日期胶囊底色的存在感过强，改为轻量文字 + 字距 */
+/* 日期胶囊底色的存在感过强，改为轻量文字 + 字距 */
 .post-date {
   color: var(--c-text-4);
-  font-size: 0.82rem;
-  letter-spacing: 0.04em;
+  font-size: var(--c-fs-meta);
+  letter-spacing: var(--c-ls-meta);
   font-variant-numeric: tabular-nums;
+}
+
+/* 窄屏：序号收窄，元信息落到标题下方 */
+@media (max-width: 720px) {
+  .post-card {
+    grid-template-columns: 2.25rem minmax(0, 1fr);
+    gap: 0 14px;
+  }
+
+  .post-card-meta {
+    grid-column: 2;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    margin-top: 10px;
+    white-space: normal;
+  }
 }
 
 .home-more {

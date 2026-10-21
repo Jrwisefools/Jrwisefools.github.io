@@ -13,6 +13,7 @@ import ImageLightbox from './ImageLightbox.vue'
 import NavIdentity from './NavIdentity.vue'
 import SidebarToggle from './SidebarToggle.vue'
 import NavMascot from './NavMascot.vue'
+import NotFoundShark from './NotFoundShark.vue'
 import { setupCodeCopy } from './codeCopy.js'
 
 const { Layout } = DefaultTheme
@@ -49,6 +50,11 @@ watch(
 
     <template #layout-bottom>
       <ImageLightbox />
+    </template>
+
+    <!-- 404 页：鲨鱼迷路了 -->
+    <template #not-found>
+      <NotFoundShark />
     </template>
   </Layout>
 </template>
