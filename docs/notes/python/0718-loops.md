@@ -5,7 +5,7 @@ tags:
   - Python
   - 基础
 archived: true
-description: "当表达式成立的时候进行循环，条件不成立才跳出循环 else当循环正常结束的时候才执行"
+description: "当表达式成立的时候进行循环，条件不成立才跳出循环 else 当循环正常结束的时候才执行"
 ---
 # DAY 4
 ## 4.3.1 循环
@@ -16,9 +16,9 @@ while 表达式:
 ```
 当表达式成立的时候进行循环，条件不成立才跳出循环
 ### 2. while else（了解）  
-else当循环正常结束的时候才执行
+else 当循环正常结束的时候才执行
 ```python
-#需求：键盘录入一个数，判断1~该数范围内，也没有偶数
+#需求：键盘录入一个数，判断1~该数范围内，有没有偶数
 num1 = int(input("请输入一个数字："))
 i = 1
 flag = False #标记是否有偶数!
@@ -63,7 +63,7 @@ for chr in myStr:
 ```
 ```python
 """遍历range数列"""
-#rang自动获取1~10之间的数
+# range 自动获取 1~10 之间、步长为 2 的数
 for i in range(1,10,2):#左闭右开[1,10)，开始值可以不写，但是结束值（不包含）必须写
     print(i)
 #step 步数,后续再加一个逗号就可以设定步数为2
@@ -88,7 +88,7 @@ for i in range(1,10):
 ```python
 """
 案例：打印0-9，跳过偶数
-总结：跳过本次循环，继续下一此循环
+总结：跳过本次循环，继续下一次循环
 """
 for i in range(10):
     if(i % 2 == 0):
@@ -102,14 +102,14 @@ for i in range(10):
 ```python
 """
 案例：求0-9每个数自己的幂自己的加和，如果大于10000000则终止循环
-总结：跳过本次循环，继续下一此循环
+总结：break 直接终止整个循环，不再继续后续轮次
 """
 sum = 0
 for n in range(10):
     sum = sum + n**n
     if sum > 10_000_000:
         break
-print('sum')
+print(sum)
 ```
 
 #### （3）pass
@@ -135,11 +135,11 @@ print(list1[1])
 print(list1[2])
 #print(list1[2])#报错
 
-#从右往左
-print([-1])#获取最后一个元素
-print([-2])
-print([-3])
-#print([-4])#报错
+#从右往左（负数索引从 -1 开始）
+print(list1[-1])#获取最后一个元素
+print(list1[-2])
+print(list1[-3])
+#print(list1[-4])#报错（超出范围）
 ```
 
 #### 2.列表切片
@@ -175,12 +175,12 @@ list1.extend(list2)#也是在list1后面加list2
 for item in list2:
     list1.append(item)
 ```
-#### 4.列表的乘法
+#### 5.列表的乘法
 ```python
 list1 = [1,2,3]
 print(list1*2) #这里输出的是[1,2,3,1,2,3]是复制两份而不是每个元素乘2
 ```
-#### 5.列表中修改元素
+#### 6.列表中修改元素
 ```python
 list1 = [1,2,3]
 #使用脚标修改
@@ -188,18 +188,18 @@ list1[-1] = 33 #将最后一个元素修改成33
 #使用切片修改
 list1[0:]=[11,22,33]#从脚标为0的修改到最后一个
 ```
-#### 6.检查成员是否为列表中元素
+#### 7.检查成员是否为列表中元素
 in=>成员运算符
 ```python
 list1 =[1,2,3,4,5]
 print(11 in list1)#False
 ```
-#### 7.获取列表长度
+#### 8.获取列表长度
 ```python
 list1 =[1,2,3,4,5]
 print(len(list1))#5
 ```
-#### 8.获取最大值，最小值求和
+#### 9.获取最大值，最小值求和
 max(),min(),sum()
 
 ### 遍历列表
@@ -211,7 +211,7 @@ for item in list1:
 #通过下表遍历
 for index in range(len(list1)):
     print(index)
-#使用没剧情enumerate
+#使用枚举 enumerate：同时拿到索引和元素
 for index,item in enumerate(list1):
     print(f"脚标={index},元素={item}")#一个方法即拿到了脚标又拿到了元素
 ```
@@ -282,10 +282,10 @@ zip（）函数可将多个可迭代的对象中打印一个个元组
 zip（list1,list2）,让其变成一个元组了
 
 ### list函数
-list.pop()#冒泡，删除并获取指定位置的数据，默认为末尾  
+list.pop()#弹出（pop），删除并获取指定位置的数据，默认为末尾  
 list.clear()#清空列表  
 sorted(list，reverse = True)#返回一个新列表排序，reverse为真表示反转  
-list.sort#不返回一个新的列表还是旧的列表  
+list.sort()#原地排序，不返回新列表（返回 None），直接修改原列表  
 reverse()反转列表元素  
 list.count(x)返回x的数量  
 list.copy 拷贝列表类似与切片（这是一个浅拷贝）  
@@ -304,7 +304,7 @@ print(myStr)
 #使用切片
 print(myStr[0:2])
 #字符串相加
-myStr2 = "fuckword"
+myStr2 = "world"
 print(myStr+myStr2)#拼接
 print(myStr+str(1))#把1强制转换成字符串之后拼接
 #字符串乘法
@@ -322,13 +322,13 @@ print(myStr3)
 
 ```python
 # 替换
-myStr = "helloword helloword helloword helloword helloword"
-print(myStr.replace("hello", "fuck", 1))  # 只把第一个hello替换成fuck
+myStr = "helloworld helloworld helloworld helloworld helloworld"
+print(myStr.replace("hello", "world", 1))  # 只把第一个 hello 替换成 world
 
 myStr.split(" ", 1)  # 把字符串按照空格分割,默认全部分，后面加1表示只分第一个空格,分割之后是列表[]
 
-"-".join("a", "b", "c")  # 以—分割，其中必须是字符串，->a-b-c
-myStr = "  helloword"
+"-".join(["a", "b", "c"])  # 以—分割，其中必须是字符串，->a-b-c
+myStr = "  helloworld"
 print(myStr.split(" "))  # 去除指定前缀
 myStr.removeprefix(" ")  # 去除前缀但是就去掉一个
 ##########
@@ -343,6 +343,15 @@ print("{:-^30}".format(myStr))#字符格式化，跟上方作用一样，输出�
 print("abc1".isalpha())#判断其中是否只用字母
 print("123".isdigit())#判断字符串中是否只包含数字
 ```
+
+> **补充整理**：本篇几个高频踩坑点，顺手捋清：
+>
+> 1. **`str.join` 的参数是可迭代对象，不是多个字符串**。
+>    `"-".join("a","b","c")` 会直接报 `TypeError`，必须写成 `"-".join(["a","b","c"])`（或元组）。
+>    记忆口诀：**join 是"字符串的方法"，括号里只接一个序列**。
+> 2. **`list.sort()` 原地排序，返回 `None`**。想要排序后的新列表用 `sorted(list)`；
+>    新手常写 `new_list = list1.sort()`，结果 `new_list` 变成了 `None`。
+> 3. **负数索引从 `-1` 开始**（`-1` 是最后一个元素，`-2` 倒数第二），不是从 `0`。
 
 ## 深拷贝和浅拷贝（扩展）
 浅拷贝:内容相同，外层容器的地址发生变化，但是内部的地址不变化

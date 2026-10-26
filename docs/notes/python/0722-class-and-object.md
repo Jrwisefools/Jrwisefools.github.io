@@ -36,12 +36,12 @@ home = person.home
 print(person)
 person.eat()
 ```
-### _init_方法（魔法函数）
+### __init__方法（魔法函数）
 也称为构造函数，创建类对象的时候，对对象的属性进行初始化  
-放使用类名创造一个新的对象的时候，python会自动调用该方法  
+当使用类名创建新的对象时，python 会自动调用该方法  
 注意：
 1. self：约定俗成，代表类和对象本身，可以通过此访问和修改对象与属性
-2. _init_()方法: 可以不写，系统的init啥也不做，意义是初始化
+2. __init__() 方法可以不写，系统默认的 __init__ 什么都不做，它的意义是初始化
 3. _init_()方法只能返回None，不能返回其他值
 ```python
 class Person:
@@ -66,7 +66,7 @@ person2 = Person("李四")#此时self就变成了person2
 ### self
 self当前类的当前对象，谁调用谁就是self
 1. 调用实例方法
-当打可以通过类调用也可以先创建对象再调用方法
+代码既可以通过类调用，也可以先创建对象再调用方法
 ```python
 class Person:
     def __init__(self,name):
@@ -97,7 +97,7 @@ class Person:
         print(self.name)
         self.drink()  # 在方法里面用了类，调用成员，使用成员
         # drink()这是一个类里面的方法，要么用对象引用要么用类名引用
-        Person.eat(self)  # 用类应用但是要传对象等价于=self.name#一般不这么做
+        Person.eat(self)  # 通过类调用方法时，需要手动把对象作为第一个参数传入（一般不推荐这么做）
 
 p = Person("张三")
 p.eatAndDrank()
@@ -155,7 +155,7 @@ class Person:
     def eat(self):
         print("eating")
     #实例方法
-    def instancrFunc(self):
+    def instanceFunc(self):
         #访问类属性:类名.属性名,对象名.属性名
         print(f"{self.home}")
         #访问实例属性：对象名.属性名
@@ -179,7 +179,7 @@ class Person:
     
     #类方法
     @classmethod
-    def classMethod(cla):#cal:当前类
+    def classMethod(cls):#cls：当前类
         print(cla.home)
     #初始化属方法
     def __init__(self, name, age):
@@ -335,13 +335,13 @@ class Person:
 
 # 类方法
 @classmethod
-def classMethod(clazz):
-    print("普通方法")
-    # 使用对象成员self
+def classMethod(cls):
+    print("类方法")
+    # 类方法只能访问类成员，不能访问实例成员（self）
 # 静态方法
 @staticmethod
 def staticMethod():
-    open("静态单独")
+    pass  # 占位，不应真的打开文件
 
 #动态添加类方法
 Person.classFunction = classMethod
@@ -401,7 +401,7 @@ import types
 # 动态添加对象方法eat
 p.eat = types.MethodType(eatFunc,p)
 # 动态添加对象方法drink(不在slots范围）
-# p.eat = types.MethodType(drinkFunc(),p) #这里会报错
+# p.eat = types.MethodType(drinkFunc, p) # 这里会报错（drinkFunc 不在 slots 内）
 #动态添加类属性
 Person.home = "火星"
 print(Person.home)
@@ -409,13 +409,13 @@ print(Person.home)
 @classmethod 
 def classMethod():
     print("类方法")
-Person.classFunction = classMethod()
-Person.classFunction
+Person.classFunction = classMethod  # 赋值「函数对象」本身
+Person.classFunction()              # 再调用类方法
 #动态添加静态方法
 # 静态方法
 @staticmethod
 def staticMethod():
-    open("静态单独")
+    pass  # 占位，不应真的打开文件
 Person.staticFunc = staticMethod
 Person.staticFunc()
 ```
@@ -516,12 +516,12 @@ class Person:
     
 p = Person("张三")
 #访问私有对象属性
-print(p.Person__name)
+print(p._Person__name)
 # print(p.getName())
 print(p.name)#用了property就不用括号调用了，相当于一个属性但是是调用方法
 
 #设置私有对象属性
-p.name("李四")
+p.name = "李四"
 print(p.name)
 
 ```

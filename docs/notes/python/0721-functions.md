@@ -5,10 +5,10 @@ tags:
   - Python
   - 基础
 archived: true
-description: "def reduce(): pass开发中，有时候希望一个函数执行结束后，告诉调用者一个结果，以便调用者针对具体的结果做后续的处理。返回值就是函数完成工作后，给调用者的一个结果 1. 在函数中使用 r…"
+description: "Python 函数与返回值：return 返回结果、函数嵌套与闭包、作用域（global/nonlocal）、递归、lambda 与内置函数（map/filter/reduce）、文件操作基础，以及面向对象入门。"
 ---
-def reduce():
-    pass开发中，有时候希望一个函数执行结束后，告诉调用者一个结果，以便调用者针对具体的结果做后续的处理。返回值就是函数完成工作后，给调用者的一个结果      
+# 函数返回值
+开发中，有时候希望一个函数执行结束后，告诉调用者一个结果，以便调用者针对具体的结果做后续的处理。返回值就是函数完成工作后，给调用者的一个结果。      
 1. 在函数中使用 return 关键字可以返回结果 ，并结束正在执行的函数    
 2. 如果return后面跟[表达式]，在结束函数的同时向调用方返回一个表达式。   
 3. 如果仅仅是return关键字，后面没有加内容，函数执行返回调用方None。   
@@ -58,22 +58,26 @@ B （Built-in） 内建作用域（python内置的）
 ```python
 globalNum = 1 #全局变量
 #闭包函数
-def outer()
+def outer():
     #嵌套作用域
     enclosingNum = 2
-    def innter():
+    def inner():
         #局部作用域
         localNum = 3
         print("局部作用域：",localNum)
         print("嵌套作用域：",enclosingNum)
         print("局部作用域：",globalNum)
-    return innter()#outer方法执行之后的结果，inner方法
+    return inner   # 返回 inner 函数对象本身（闭包），不要加 () 调用
 #调用outer方法
 result = outer()
-result()        
+result()
+
+> **补充整理**：这里 `return inner` 返回的是**函数对象本身**（闭包），所以 `result = outer()` 拿到的是 `inner` 函数，再 `result()` 才真正执行它。
+> 如果写成 `return inner()`，outer 会直接把 inner 的**执行结果**（这里是 `None`）返回，紧接着 `result()` 就会报 `TypeError: 'NoneType' object is not callable`。
+> 这也正是"闭包"的精髓：**inner 记住了外层 `enclosingNum`，即便 outer 已结束，这个变量依然被持有。**
 ```
 #### 模块
-py文件就是一个模块，类，函数==>只有这三个地方可以映入新的作用域
+py文件就是一个模块，类，函数==>只有这三个地方可以引入新的作用域
 除了其他代码块(如if/elif/else，for,while,try)不会引入新的作用域， 
 这四个里面的变量其他位置也可以直接引用
 ```python
@@ -122,7 +126,7 @@ outer()
 ```
 ```python
 num2 = 0
-num2 += 1#这里没有定义num2所以或报错，得先定义num2的初始值
+num2 += 1#这里没有定义num2所以会报错，得先定义num2的初始值
 #同理定义在函数里也是一样的，单在函数中执行之前必须在函数中定义局部变量num并给初值
 #函数里相当于一个新的作用域，在这个新的里面没有用这个关键字所以报错
 
@@ -161,7 +165,7 @@ def func(x,y,operate):
     :param x:参与运算的第一个数
     :param y:参与运算的第二个数
     :param operate:四个方法中的一个
-    :return:元之后的结果
+    :return:返回之后的结果
     """
     return operate(x,y)
 #对传统进行简化
@@ -196,7 +200,7 @@ list1 = [1, 2, 3, 4, 5]
 result = filter(lambda x : x % 2 == 0,list1)
 print(list(result))
 ```
-### refuce(累积)
+### reduce(累积)
 可以是加减乘除
 ```python
 list1 = [1, 2, 3, 4, 5]
@@ -215,21 +219,21 @@ def dog1(name,age,species):
 ## 第七章 文件操作
 文件系统通过文件名和文件路径优化  
 文件路径可以是绝对路径(从文件系统的盘符来定位管理文件)，或相对路径(相当于当前)
-1. 相对路径：层级目路比较简答使用操作./、(/可以省略)
-2. ,上级目录，**/上上目录
-2. 绝对路径
+1. 相对路径：层级目录比较简单，常用 `./`（当前目录，可省略）、`/`（根目录）
+2. `..` 上级目录，`../..` 上上级目录
+3. 绝对路径：从文件系统根目录（如 `C:\` 或 `/`）开始完整定位
 
 ### 文件的打开与关闭
 1.open()打开或者创建文件、   
-r	读写方式：只读，文件若不存在会报错。默认此模式   
-w	读写方式：写入，写入前清空原有数据。文件不存在会创建文件   
-a	读写方式：追加写入，在原有数据后追加，文件不存在会创建文件   
-x	读写方式：创建新文件并写入，文件若已存在会报错   
+r	模式：只读，文件若不存在会报错。默认此模式   
+w	模式：写入，写入前清空原有数据。文件不存在会创建文件   
+a	模式：追加写入，在原有数据后追加，文件不存在会创建文件   
+x	模式：创建新文件并写入，文件若已存在会报错   
 b	编码方式：以二进制打开。一般用于非文本文件如图片等   
 t	编码方式：以文本模式打开，默认此模式  
-+能读能写
++ 可读可写（与其他模式组合，如 `r+`、`w+`）
 ### 关闭文件
-f.close
+f.close()
 ```python
 #以读的模式打开
 file = open('./a.txt',"r")#可以用绝对路径，不给参数默认读的模式
@@ -289,7 +293,7 @@ content = file.readlines()
 ```python
 import os
 
-for root,dirs,files in os.walk("./a")#a是文件夹，当前目录下的a目录
+for root,dirs,files in os.walk("./a"):#a是文件夹，当前目录下的a目录
     #root:所有的路径
     #dirs:所有的目录
     #files:所有的文件

@@ -11,8 +11,8 @@ description: "1. 当生成器使用yield语句时,把函数暂停 2. 将yield后
 ## 生成器
 1. 当生成器使用yield语句时,把函数暂停
 2. 将yield后的表达式作为当前迭代器的值返回
-__yield 暂停并返回值__
-__return 结束程序并返回值__
+**yield**：暂停并返回值
+**return**：结束生成器（或函数）并返回值
 3. 每次调用生成器的next()方法或使用for循环进行迭代时，
 总结: __yield__ 暂停并返回值，使用next函数或for循环都会进入下一次调用
 
@@ -186,7 +186,7 @@ decorator是一个装饰器函数，接受一个函数func作为函数,
 ```python
 """
 使用闭包实现装饰器
-原函数功能kaipingf
+原函数功能：开平方
 增强函数之后的功能是求绝对值之后再开平方    
 """
 from math import sqrt
@@ -268,7 +268,7 @@ def getAbs(func):
 @getInt#先执行这个
 @getAbs#再执行这个
 def mySqrt(num):
-    return sqrt()
+    return sqrt(num)
 ```
 ### 带参数的装饰器
 
@@ -293,7 +293,7 @@ def times(n):
 def mySqrt(num):
     return sqrt(num)
 
-print(mySqrt("16"))
+print(mySqrt(16))
 ```
 
 ### 类装饰器
@@ -337,12 +337,11 @@ windows没有fork()调用，不过python提供了一个模块 multiprocessing
 1. process的创建
 ![img_8.png](/images/python/img_8.png)
 group:始终为None
-raget：驱使进程执行目标任务
+target：驱使进程执行目标任务
 name：进程名称
 args：针对目标函数调用的元组（如果参数只要一个后面需要加上逗号）
-2. Pross的属性和方法
+2. Process 的属性和方法
 
-### 
 ```python
 import multiprocessing
 #创建进程并开启

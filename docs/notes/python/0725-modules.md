@@ -10,8 +10,8 @@ description: "模块不能和python中自带的标注模块重名 指定导入�
 # Day9
 ## 模块
 
-模块不能和python中自带的标注模块重名
-```python "my_add" 
+模块不能和 python 中自带的标注模块重名（`my_add.py` 文件内容如下）
+```python
 num = 100
 def add(a,b):
     """求两个数的和"""
@@ -28,7 +28,8 @@ print(myadd.num)
 ### 局部导入，指定
 指定导入模块的部分成员，通过成员名的方式访问,  
 from 模块名 import 成员名1[as 别名],成员2[as 别名]
-```python my_mylti
+```python
+# my_multi.py 文件内容
 num = 100
 def mul(a,b):
     return a*b
@@ -41,7 +42,7 @@ def mul(a,b):
 from my_add import add,num as n1
 from my_multi import num as n2
 print(add(1,1))
-print(num)
+print(n1, n2)  # 用了别名后两个 num 互不覆盖，分别通过 n1、n2 访问
 ```
 ### 局部导入from import*
 导入模块中所有不易单下划线开头的成员，直接通过成员名的方式访问
@@ -136,7 +137,7 @@ print(dir())
 导入包中模块所有成员
 ```python
 """import 全部导入"""
-import graphic.cicle
+import graphic.circle
 #如果最后一项是包，那就是导入包一次导入太多python不支持->import graphic(报错识别不了)
 #如果最后一项是包那就得在__init__.py中指定导入模块
 
@@ -145,7 +146,7 @@ print(graphic.cicle)
 
 ```python
 from .import circle #从当前目录中找（推荐）
-from chapter12.chapter12_7_1 graohic import circle#从写的目录里找（不推荐）
+from chapter12.chapter12_7_1.graphic import circle #从完整目录中找（不推荐，应使用绝对导入）
 import circle #导入模块 模块搜索顺序
 #上面的 当前目录->python官方库->第三方扩展库
 import circle #是根据运行的程序里面去找，所以会出问题，找不到模块
@@ -165,7 +166,7 @@ print(radius)
 局部导入from import *
 ```python
 from graphic import *
-print(cicle.radius)
+print(circle.radius)
 ```
 上面代码需要在__init__.py文件中写__all__
 
@@ -200,12 +201,12 @@ pip config
 深拷贝：完全拷贝了父对象及其子对象。
 拷贝后所有层都是独立的。  
 ### 如何进行浅拷贝
-1. 切片\
+1. 切片
 ```python
 #外部地址发生变化内部地址不变
 list1  =[1,2,3,[4,5,6]]
 #切片
-list2 = list[:]
+list2 = list1[:]
 print(id(list1),id(list2))
 print(id(list1[3]),id(list2[3]))
 print("******")
@@ -232,7 +233,7 @@ print(isinstance({"name":"张三"},Iterable))
 ```
 #### 使用迭代器
 迭代器有两个基本的方法: iter() 和 next()  
-__!!记住：__next__ 要么方法for循环一次执行一次，__  
+__next__ 方法在 for 循环每迭代一次时自动执行一次（或手动调用 next() 时执行一次）  
 或者使用迭代器对象调用一次next方法
 ```python
 list1 = [1,2,3]
@@ -247,8 +248,8 @@ print(next(it))
 print(next(it))#会报错迭代器停止了
 ```
 #### 创建迭代器
-迭代器中要有数据通过init方法给迭代器进行初始化
-所以要重写init方法和next方法
+迭代器中要有数据，通过 __init__ 方法给迭代器进行初始化
+所以要重写 __init__ 方法和 __next__ 方法
 ```python
 """对一个序列执行正向迭代器"""
 class MyInterator:
@@ -267,7 +268,7 @@ class MyInterator:
         # assert not self.index >= len(self.data),StopIteration 断言
         item = self.data[self.index]
         self.index += 1
-        return self.data[self.index]
+        return item  # 返回「当前」元素，而非 index+1 处的元素
 
 list1 = [1,2,3]
 myIterator = MyInterator(list1)
@@ -294,8 +295,8 @@ class MyInterator:
             raise StopIteration
         # assert not self.index >= len(self.data),StopIteration 断言
         item = self.data[self.index]
-        item += 1
-        return self.data[self.index]
+        self.index -= 1
+        return item  # 反向迭代：先回退下标，再返回当前元素
 
 list1 = [1,2,3]
 myIterator = MyInterator(list1)

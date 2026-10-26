@@ -56,7 +56,7 @@ class Student(Person):
         self.grade = grade
     def study(self):
         print("student study")
-class ChineseStudent(YellowRace,Student)
+class ChineseStudent(YellowRace,Student):
     country = '中国'
 
 student = ChineseStudent("张三","五年级")
@@ -95,7 +95,7 @@ student.study()
 ### 方法解析顺序（重要）
 super要遵守方法解析顺序（mro），通过类名.__mro__    
 调用“当前类在mro链中下一个类  
-1. 无参数：super().__init__()制动绑定当前类和实例，找下一个
+1. 无参数：super().__init__()自动绑定当前类和实例，找下一个
 2. 有参数：super(mro上一个类)
 ```python
 class Person():
@@ -120,7 +120,7 @@ class ChineseStudent(YellowRace,Student):
 
 student = ChineseStudent("张三")
 print(ChineseStudent.mro())
-#mor链条就是书写的从左往右
+#mro链条就是书写的从左往右
 ```
 
 ```python

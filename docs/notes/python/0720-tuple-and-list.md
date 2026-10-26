@@ -22,9 +22,10 @@ tuple1 = (1,2,3)
 
 #只要一个元素
 tuple2 = (4,)
-#使用推导式
-tuple3  = (x for x in range(5,8))
-print(tuple3)
+# 注意：() 里放推导式得到的是「生成器表达式」，不是元组
+# Python 没有元组推导式，想要元组要用 tuple() 转换
+tuple3 = tuple(x for x in range(5, 8))
+print(tuple3)   # (5, 6, 7)
 ```
 ### 2.访问元组
 ```python
@@ -36,23 +37,26 @@ print(tuple1[-1])
 #使用切片
 print(tuple1[0:1])
 ```
-### 2.访问元组
+### 3.遍历元组
 ```python
 tuple4 = (1,2,3)
 #for遍历
 for item in tuple4:
     print(item)
 ```
-### 2.元组的不可变
+### 4.元组的不可变
 不可变类型：int、float、bool、str
 可变类型：list、set、dict、类对象
+
+> **补充整理**：上面的"不可变类型"漏了 **元组 tuple**——tuple 和 int/str 一样是不可变的（只是它内部装的**可变元素**还能改，见下方示例）。
+> 一句话记：**不可变 = int / float / bool / str / tuple；可变 = list / set / dict / 自定义对象**。
 ```python
 tuple1 = (1,2,3)
 print(id(tuple1))
 print(tuple1)
 #验证不可变
 tuple1[0]=11
-#上面代码会报错‘tuple；object dose not support item assignment
+#上面代码会报错：'tuple' object does not support item assignment
 tuple1 = tuple1 + (4,5,6)
 print(id(tuple1))
 print(tuple1)
@@ -103,8 +107,8 @@ mySet.add(4) #添加元素
 mySet.update({4,5,6}) #添加元素，x为列表、元组、字符串、字典、集合等
 print(mySet)
 newSet = mySet.union({4}) #添加元素后返回一个新的集合,x可以为列表、元组、集合
-set.remove(4) #从集合中移除x，x不存在报错
-set.discard(7) #从集合中移除x，x不存在也不报错
+mySet.remove(4) #从集合中移除x，x不存在报错
+mySet.discard(7) #从集合中移除x，x不存在也不报错
 pop=mySet.pop() #随机取出集合中一个元素，如果集合为空则报错
 
 #set.clear() 清空集合
@@ -123,11 +127,11 @@ mySet1.issuperset(mySet2)
 mySet1.symmetric_difference(mySet2)#求两个集合中不重复的元素，返回一个新的集合
 mySet1.symmetric_difference_update(mySet2)#求两个集合中不重复的元素
 #拷贝集合
-set.copy()
-len(set)
-max(set)
-min(set)
-sum(set)
+mySet.copy()
+len(mySet)
+max(mySet)
+min(mySet)
+sum(mySet)
 
 ```
 ## 字典
@@ -136,9 +140,14 @@ sum(set)
 字典没有索引  
 如果想拿到对应的值可以通过键来获得  
 值可以取任何数据类型，但键必须是不可变的，如字符串、数字、元组
+
+> **补充整理**：原稿写"字典是无序的"，这是 **Python 3.6 及以前** 的说法。
+> 从 **Python 3.7 起，字典已保证按插入顺序保存**，遍历顺序就是插入顺序，可以放心依赖。
+> 另外：键必须是不可变类型，**列表不能当键**（会报 `unhashable type` 错误）。
+
 ### 创建字典
 ```python
-#创建空子典
+#创建空字典
 myDict ={}
 print(myDict)
 
@@ -147,7 +156,7 @@ print(myDict)
 myDict = dict(name="张三",age=18,sex="男")
 myDict = dict([("name","Tom"),("age",22),("sex","男")])
 print(myDict)
-myDict = {[1,2,3],4,5,6}
+myDict = {"nums":[1,2,3], "a":4, "b":5, "c":6}  # 键必须是不可变类型，这里用字符串键
 ```
 ### 访问字典
 用[]访问字典，key不存在会报错
@@ -183,7 +192,7 @@ for key in keys:
 #遍历value
 values = myInfo.values()
 for value in values:
-    print(values)
+    print(value)
 #通过key遍历value
 keys = myInfo.keys()
 for key in keys:
@@ -209,7 +218,7 @@ myInfo = {"name":"张三","age":18,"sex":"男"}
 #pop,获取并删除并获取
 lastKV = myInfo.popitem()#获取最后的键值对并删除
 #更新
-myInfo2 = {""}
+myInfo2 = {"city": "北京"}  # update 接收的是字典
 myInfo.update(myInfo2)
 #get
 myInfo.get("name")
@@ -245,7 +254,7 @@ def myPrint():#小驼峰规范
 myPrint()
 myPrint()
 ```
-使用函数使程序变得更简短清晰，提高程序的开发性，提高代码复用，便于分工写作，便于代码击中管理，有利于程序维护
+使用函数使程序变得更简短清晰，提高程序的开发性，提高代码复用，便于分工协作，便于代码击中管理，有利于程序维护
 ### 函数参数的抽取
 ```python
 #定义函数：打印两行三列
@@ -273,7 +282,7 @@ def myPrint(row,col):
 #### 传递可变参数类型
 ![img_4.png](/images/python/img_4.png)
 ![img_6.png](/images/python/img_6.png)
-#### 传递不可变参数类型： list、set、dict、类对象
+#### 传递不可变参数类型：int、float、bool、str、tuple
 ![img_5.png](/images/python/img_5.png)
 
 ### 函数可用参数形式
@@ -300,7 +309,7 @@ func(a=1,b=2,c=3)#可以没有c，即输出c为33，但是不能没有ab，没�
 注意：默认值参数必须在非默认参数的后面，不然会报错
 
 #### 不定长的参数
-一个星号*会以元组的形式穿
+一个星号 * 会以元组的形式传
 参数的个数是不确定的
 ```python
 def func(a,b,*args):
@@ -326,7 +335,7 @@ func(1, 2, c=3,d=4)
 ```
 
 ### 解包传参
-若函数新参是定长参数，可以通过*对列表、元组，**对字典解包传参
+若函数形参是定长参数，可以通过*对列表、元组，**对字典解包传参
 ```python
 # *对列表元组进行解包
 def func(a,b,c):

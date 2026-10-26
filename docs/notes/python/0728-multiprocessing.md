@@ -36,9 +36,9 @@ def readFile():
             time.sleep(0.5)
 
 if __name__ == "__main__":
-    writeProcess = multiprocessing.Process(target=writeFile())
+    writeProcess = multiprocessing.Process(target=writeFile)
     writeProcess.start()
-    readProcess = multiprocessing.Process(target=readFile())
+    readProcess = multiprocessing.Process(target=readFile)
     readProcess.start()
 ```
 ### 进程池
@@ -66,7 +66,7 @@ if __name__  == "__main__":
         
     pool.close() #关闭池子
     # 阻塞主进程，等待子进程执行完毕    
-    pool.jion()    #同jion的时候保证池子为关闭
+    pool.join()    # 等待所有子进程执行完毕后再继续
     print("end")
 ```
 ### 进程间的通信
@@ -109,7 +109,7 @@ def func1(queue):
 def func2(queue):
     while True:
         radNum = queue.get()
-        print(f"{os.getpid}---读{radNum}")
+        print(f"{os.getpid()}---读{radNum}")
         time.sleep(0.2)
 
 if __name__ == "__main__":
@@ -230,7 +230,7 @@ if __name__ == "__main__":
     #全局变量，因为是全局变量所有上面的func里面可以不定义list1之间删掉
     list1 = [] #线程可以共享数据
     #提交任务
-    [pool.submit(func)for i in range(3)]#,list1) for i in range(3)]#批量提交任务
+    [pool.submit(func) for i in range(3)]  # 批量提交任务
     #等待所有子线程结束，再关闭线程池
     pool.shutdown(wait=True)
     #打印结果
@@ -245,8 +245,6 @@ if __name__ == "__main__":
 ```
 2. 互斥锁
 某个线程要更改共享数据时，先将其锁定，此时其他线程无法抢占
-import time
-import threading
 
 def fun():
     
@@ -339,7 +337,7 @@ python全局解释器锁，同一时间只允许一个线程保持python解释�
 regular expression
 对指定的字符串进行提取、匹配、校验、查找数据等等
 ### re模块
-impoet re
+import re
     
 1. search
     re.search(pattern,string)
@@ -507,7 +505,7 @@ test = [
 ]
 
 # 邮箱正则
-email_pattern = r"\w+^@\w+\.\w+$"
+email_pattern = r"\w+@\w+\.\w+$"
 
 for mail in test:
     match = re.fullmatch(email_pattern, mail)

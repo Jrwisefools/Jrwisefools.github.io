@@ -9,7 +9,7 @@ description: "Python 协程笔记：协程与进程线程的对比、async/await
 ---
 # 协程
 
-## 协程概述
+## 1.1 协程概述
 
 协程（Coroutine）是 Python 中处理高并发的强大工具，是一种用户态的轻量级线程，也叫**微线程**。它不像线程那样由操作系统调度，而是由程序自身控制。
 
@@ -21,7 +21,7 @@ description: "Python 协程笔记：协程与进程线程的对比、async/await
 | **线程** | 操作系统 | 较大（内核级） | 共享内存（需加锁） | I/O密集型（低并发） | 受GIL限制，调度开销大 | 共享地址空间 |
 | **协程** | 程序自身（Event Loop） | 极小（函数调用级） | 共享内存（无需加锁） | I/O密集型（极高并发） | 需要配套异步库 | 极高并发，高性能I/O |
 
-###  线程处理 I/O 密集型操作的不足
+### 线程处理 I/O 密集型操作的不足
 
 在处理大量 I/O 密集型任务（如 Web 服务同时处理数千个用户连接）时，线程模型存在以下瓶颈：
 
@@ -29,7 +29,7 @@ description: "Python 协程笔记：协程与进程线程的对比、async/await
 2. **同步复杂**：线程共享内存需要使用锁（Lock）保护数据，增加复杂性，可能导致死锁
 3. **阻塞浪费**：线程执行到网络等待时会阻塞并挂起，但线程切换成本高，无法创建足够多的线程应对极高并发
 
-###  协程优势
+### 协程优势
 
 1. **调度者**：由程序自身调用，主动让出 CPU 给其他协程（通过 `await` 关键字），类似 `yield`
 2. **轻量级**：创建成本极低，一个线程可以轻松创建数万个协程
@@ -38,7 +38,7 @@ description: "Python 协程笔记：协程与进程线程的对比、async/await
 
 ---
 
-## async 和 await
+## 1.2 async 和 await
 
 Python 3.5+ 中通过 `async` 和 `await` 关键字实现协程。
 
@@ -110,11 +110,11 @@ if __name__ == "__main__":
 
 ---
 
-## 事件循环（Event Loop）
+## 1.3 事件循环（Event Loop）
 
 事件循环是管理和调度所有协程的核心机制，是协程并发模型的"心脏"。
 
-###  注册协程到事件循环的三种方式
+### 1.3.1 注册协程到事件循环的三种方式
 
 | 方式 | 用途 | 说明 |
 |------|------|------|
@@ -282,6 +282,34 @@ task = asyncio.create_task(slow_task())
 task.cancel()  # 请求取消任务
 # 被取消的 Task 会抛出 asyncio.CancelledError 异常
 ```
+
+> **补充整理**：原稿在取消任务后没有讲"怎么正确等待取消结果"，这里补三个实战高频点：
+>
+> **1. 取消后要 `await` 一下才能拿到结果（或异常）**
+> `cancel()` 只是"发请求"，协程真正结束要等它跑完：
+> ```python
+> task = asyncio.create_task(slow_task())
+> task.cancel()
+> try:
+>     await task          # 必须 await，否则取消可能没生效
+> except asyncio.CancelledError:
+>     print("任务已被取消")
+> ```
+>
+> **2. `asyncio.run()` 不能在已运行的循环里调用**
+> 在协程内部再调 `asyncio.run()` 会直接报 `RuntimeError: asyncio.run() cannot be called from a running event loop`。
+> 协程里要并发就 `create_task` / `gather`，不要重新造一个循环。
+>
+> **3. Python 3.11+ 优先用 `asyncio.TaskGroup`**
+> 它比 `gather` 更安全：任意一个任务抛异常，整组其余任务会被自动取消，不会"漏掉"错误：
+> ```python
+> async with asyncio.TaskGroup() as tg:
+>     tg.create_task(async_func("C", 1))
+>     tg.create_task(async_func("D", 2))
+> # 退出 with 块时，所有任务已结束（或一起被取消）
+> ```
+>
+> 一句话记：**`gather` 要手动等、`TaskGroup` 自动收尾**，新项目直接用 `TaskGroup`。
 
 ---
 
