@@ -1,6 +1,6 @@
 ---
 title: "继承与多态"
-date: 2025-07-24
+date: 2026-07-24
 tags:
   - Python
   - 面向对象
@@ -92,6 +92,9 @@ student = Student("张三","五年级")
 student.study()
 
 ```
+
+![多继承中显式调用各父类 init 方法](/images/python/img_3.png)
+
 ### 方法解析顺序（重要）
 super要遵守方法解析顺序（mro），通过类名.__mro__    
 调用“当前类在mro链中下一个类  

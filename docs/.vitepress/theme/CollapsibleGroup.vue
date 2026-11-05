@@ -22,7 +22,12 @@ const open = computed(() => groups.isOpen(props.groupKey))
 </script>
 
 <template>
-  <section class="lib-group" :class="{ open }" :id="anchorId || undefined">
+  <section
+    class="lib-group"
+    :class="{ open }"
+    :id="anchorId || undefined"
+    :data-group-key="groupKey"
+  >
     <button
       class="group-head"
       type="button"

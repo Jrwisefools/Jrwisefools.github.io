@@ -7,11 +7,16 @@ import { data } from './archive.data.js'
 import { tagLink } from './tagLink.js'
 import CollapsibleGroup from './CollapsibleGroup.vue'
 import { useLibraryGroups } from './useLibraryGroups.js'
+import { withView } from './libraryView.js'
+
+const props = defineProps({ view: { type: String, default: 'timeline' } })
 
 const groups = useLibraryGroups()
 const monthKey = (mo) => `timeline:${mo.year}-${mo.month}`
 const allKeys = data.months.map(monthKey)
 groups.register(allKeys, allKeys.slice(0, 1))
+
+const postLink = (p, mo) => withView(p.url, props.view, monthKey(mo))
 </script>
 
 <template>
@@ -27,7 +32,7 @@ groups.register(allKeys, allKeys.slice(0, 1))
         <li v-for="p in mo.posts" :key="p.url">
           <span class="archive-day">{{ p.day }}</span>
           <div class="archive-item">
-            <a :href="p.url">{{ p.title }}</a>
+            <a :href="postLink(p, mo)">{{ p.title }}</a>
             <div class="archive-meta">
               <em v-if="p.archived" class="doc-badge raw">课堂笔记</em>
               <span class="note-tags">

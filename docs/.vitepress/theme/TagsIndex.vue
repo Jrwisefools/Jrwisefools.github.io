@@ -12,11 +12,15 @@ import { data } from './tags.data.js'
 import { tagLink } from './tagLink.js'
 import CollapsibleGroup from './CollapsibleGroup.vue'
 import { useLibraryGroups } from './useLibraryGroups.js'
+import { withView } from './libraryView.js'
 
 const props = defineProps({
+  view: { type: String, default: 'tags' },
   focusTag: { type: String, default: '' },
   focusSeq: { type: Number, default: 0 }
 })
+
+const postLink = (p, name) => withView(p.url, props.view, `tags:${name}`)
 
 const groups = useLibraryGroups()
 const groupKey = (name) => `tags:${name}`
@@ -93,7 +97,7 @@ watch(() => props.focusSeq, () => {
       <ul class="note-list">
         <li v-for="p in t.posts" :key="p.url">
           <span class="note-title">
-            <a :href="p.url">{{ p.title }}</a>
+            <a :href="postLink(p, t.name)">{{ p.title }}</a>
             <em v-if="p.archived" class="doc-badge raw">课堂笔记</em>
           </span>
           <span class="note-date">{{ formatDate(p.date) }}</span>

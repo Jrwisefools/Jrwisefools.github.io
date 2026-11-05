@@ -20,13 +20,14 @@
  * 而 encodeURIComponent 生成的 id 是字面量，两者对不上。定位统一由本组件解析、
  * 把解码后的标签名传给 TagsIndex，由它展开目标分组后滚动定位。
  */
-import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
+import { computed, nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
 import NotesIndex from './NotesIndex.vue'
 import TagsIndex from './TagsIndex.vue'
 import ArchiveIndex from './ArchiveIndex.vue'
 import { data as tagsData } from './tags.data.js'
 import { data as archiveData } from './archive.data.js'
 import { createLibraryGroups } from './useLibraryGroups.js'
+import { writeLibraryView } from './libraryView.js'
 
 const VIEWS = [
   { key: 'topic', label: '按主题', desc: '按课程主题分目录，顺着学习路径一篇篇往下读。' },
@@ -57,6 +58,8 @@ const totalTags = computed(() => tagsData.total ?? 0)
 function setView(key) {
   activeView.value = key
   focusTag.value = ''
+  // 记住当前浏览方式：文章页左侧目录按它组织，返回时也能停在原视图
+  writeLibraryView(key)
   if (typeof window === 'undefined') return
   // 统一规范到 /notes/，清掉旧 hash；只改地址不重载页面
   history.replaceState(null, '', `/notes/?view=${key}`)
@@ -80,9 +83,12 @@ function onInternalTagLink(e) {
 }
 
 onMounted(() => {
+  const params = new URLSearchParams(window.location.search)
+
   // query 优先于路径；带 #tag-xxx 进来时强制切到标签视图并记住要定位的标签
-  const q = new URLSearchParams(window.location.search).get('view')
+  const q = params.get('view')
   if (VIEWS.some((v) => v.key === q)) activeView.value = q
+  writeLibraryView(activeView.value)
 
   const raw = decodeURIComponent(window.location.hash.replace(/^#/, ''))
   if (raw.startsWith('tag-')) {
@@ -91,6 +97,23 @@ onMounted(() => {
     // 子组件的 onMounted 早于父组件执行，旧链接（如 /tags#tag-xxx）直出标签视图时，
     // TagsIndex 挂载那一刻还拿不到 focusTag。递增序号让它的 watch 补一次展开 + 定位。
     focusSeq.value += 1
+    writeLibraryView('tags')
+  }
+
+  // 从文章页点「返回全部笔记」带回来的 group：展开原分组并滚回原来的位置
+  const groupKey = params.get('group')
+  if (groupKey) {
+    groups.set(groupKey, true)
+    nextTick(() => {
+      requestAnimationFrame(() => {
+        const el = [...document.querySelectorAll('[data-group-key]')].find(
+          (n) => n.getAttribute('data-group-key') === groupKey
+        )
+        if (!el) return
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+        el.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' })
+      })
+    })
   }
 
   document.addEventListener('click', onInternalTagLink)
@@ -142,9 +165,14 @@ onBeforeUnmount(() => {
     </div>
 
     <div class="view-panel">
-      <NotesIndex v-if="activeView === 'topic'" />
-      <TagsIndex v-else-if="activeView === 'tags'" :focus-tag="focusTag" :focus-seq="focusSeq" />
-      <ArchiveIndex v-else />
+      <NotesIndex v-if="activeView === 'topic'" :view="activeView" />
+      <TagsIndex
+        v-else-if="activeView === 'tags'"
+        :view="activeView"
+        :focus-tag="focusTag"
+        :focus-seq="focusSeq"
+      />
+      <ArchiveIndex v-else :view="activeView" />
     </div>
   </div>
 </template>

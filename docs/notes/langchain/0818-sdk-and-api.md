@@ -1,6 +1,6 @@
 ---
 title: "SDK 与 API：接入大模型的第一步"
-date: 2025-08-18
+date: 2026-08-18
 tags:
   - LangChain
   - API

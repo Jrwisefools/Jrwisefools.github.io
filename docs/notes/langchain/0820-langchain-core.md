@@ -1,6 +1,6 @@
 ---
 title: "LangChain 核心概念与包结构"
-date: 2025-08-20
+date: 2026-08-20
 tags:
   - LangChain
 archived: false

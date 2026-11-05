@@ -1,6 +1,6 @@
 ---
 title: "大模型基础概念"
-date: 2025-08-11
+date: 2026-08-11
 tags:
   - 大模型
   - LLM
@@ -120,6 +120,9 @@ RLHF（Reinforcement Learning from **Human** Feedback，人类反馈强化学习
 >
 > 一个实用结论：基座模型直接拿来用常常「答非所问」——它会续写而不是回答。
 > 所以做应用时务必选带 `-Instruct` / `-Chat` 后缀的版本。
+
+
+![从预训练到续训：训练规模与算力示意](/images/llm/img_2.png)
 
 ### 硬件基础
 

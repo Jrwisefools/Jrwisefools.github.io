@@ -1,6 +1,6 @@
 ---
 title: "LangGraph 核心概念：节点、边与状态"
-date: 2025-08-23
+date: 2026-08-23
 tags:
   - LangGraph
 archived: false

@@ -1,6 +1,6 @@
 ---
 title: "Shell 文本处理工具"
-date: 2025-08-03
+date: 2026-08-03
 tags:
   - Linux
   - Shell

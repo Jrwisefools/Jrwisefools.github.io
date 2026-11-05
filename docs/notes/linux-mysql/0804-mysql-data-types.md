@@ -1,6 +1,6 @@
 ---
 title: "MySQL 数据类型"
-date: 2025-08-04
+date: 2026-08-04
 tags:
   - MySQL
   - 数据库
@@ -13,6 +13,9 @@ description: "1.整数类型 TinyInt、SmallInt、MediumInt、Int、BigInt 修�
 1.整数类型
 TinyInt、SmallInt、MediumInt、Int、BigInt
 修饰：unsigned无符号、zerofill零填充；MySQL8废弃int(M)显示宽度
+
+![MySQL 整数类型的字节数与取值范围](/images/linux-mysql/img_2.png)
+
 2.浮点类型
 单精度float
 双精度double
@@ -20,6 +23,9 @@ TinyInt、SmallInt、MediumInt、Int、BigInt
 decimal---对精度要求更高（财务金额专用，无精度丢失）
 浮点数要表示的范围更大，但存在精度误差
 M：总数字位数，D：小数位数，decimal(5,2)范围-999.99~999.99
+
+![MySQL 浮点与定点数类型对照](/images/linux-mysql/img_3.png)
+
 
 ### 字符串类型
 1. char(M) 定长字符串：固定占用M字符，适合手机号、身份证
@@ -185,6 +191,9 @@ date_format(datetime,fmt)	按照字符串fmt格式化日期datetime值
 time_format(time,fmt)	按照字符串fmt格式化时间time值  
 str_to_date(str,fmt)	按照字符串fmt将str解析为一个日期  
 get_format(val_type,format_type)	返回日期时间字符串的显示格式  
+
+
+![MySQL 常用日期时间函数速查](/images/linux-mysql/img_4.png)
 
 ### 常用加密函数
 1. password(str)（MySQL 8 已移除）

@@ -9,6 +9,8 @@ import DefaultTheme from 'vitepress/theme'
 import { onMounted, nextTick, watch } from 'vue'
 import { useRoute } from 'vitepress'
 import PostMeta from './PostMeta.vue'
+import LibraryBreadcrumb from './LibraryBreadcrumb.vue'
+import LibraryContextNav from './LibraryContextNav.vue'
 import ImageLightbox from './ImageLightbox.vue'
 import NavIdentity from './NavIdentity.vue'
 import SidebarToggle from './SidebarToggle.vue'
@@ -29,7 +31,14 @@ watch(
 <template>
   <Layout>
     <template #doc-before>
+      <LibraryBreadcrumb />
       <PostMeta />
+    </template>
+
+    <!-- 文章页左侧目录换成「按进来时的浏览方式」组织的版本；
+         框架默认的全站分组由 style.css 隐藏，避免和内容库形成两套导航 -->
+    <template #sidebar-nav-before>
+      <LibraryContextNav />
     </template>
 
     <!-- 导航栏左上角：主题吉祥物 + 站点标题（点击区域即标题锚点，回首页）。

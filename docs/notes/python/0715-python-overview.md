@@ -1,6 +1,6 @@
 ---
 title: "Python 入门：计算机基础与 Python 概述"
-date: 2025-07-15
+date: 2026-07-15
 tags:
   - Python
   - 基础
