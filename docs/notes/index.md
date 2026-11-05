@@ -1,14 +1,13 @@
 ---
-title: 笔记总览
+title: 全部笔记
 date: 2026-10-17
-# 保留主题侧栏方便跳转，但关掉右侧大纲与上下篇翻页（索引页不需要）
+# 全站唯一的内容库入口：按主题 / 按标签 / 按时间 三种视图由 ContentLibrary 切换。
+# /tags 与 /archive 保留为旧链接入口，渲染的是同一个组件。
+layout: page
+sidebar: false
 aside: false
 prev: false
 next: false
 ---
 
-# 笔记总览
-
-课程笔记按主题整理成了线上版本，时间线从 Python 基础一路走到 LangGraph。主内容对应大模型应用方向，入门阶段的课堂笔记（Python、Linux & MySQL、Java SE）收进了归档区。
-
-<NotesIndex />
+<ContentLibrary initial-view="topic" />

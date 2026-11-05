@@ -1,7 +1,7 @@
 <script setup>
 /**
- * 归档页：按年 - 月倒序聚合全部内容，形成一条时间线。
- * 数据来自 archive.data.js。
+ * 按时间视图：按年 - 月倒序聚合全部内容，形成一条时间线。
+ * 数据来自 archive.data.js；统一统计与视图切换由 ContentLibrary 负责。
  */
 import { data } from './archive.data.js'
 import { tagLink } from './tagLink.js'
@@ -9,8 +9,6 @@ import { tagLink } from './tagLink.js'
 
 <template>
   <div class="archive-index">
-    <p class="notes-stat">共 <strong>{{ data.total }}</strong> 篇内容</p>
-
     <section v-for="mo in data.months" :key="`${mo.year}-${mo.month}`" class="archive-month">
       <h2>
         {{ mo.year }} 年 {{ Number(mo.month) }} 月
@@ -22,9 +20,7 @@ import { tagLink } from './tagLink.js'
           <div class="archive-item">
             <a :href="p.url">{{ p.title }}</a>
             <div class="archive-meta">
-              <em class="doc-badge" :class="{ raw: p.archived }">
-                {{ p.archived ? '课堂速记' : '已整理' }}
-              </em>
+              <em v-if="p.archived" class="doc-badge raw">课堂笔记</em>
               <span class="note-tags">
                 <a v-for="t in p.tags" :key="t" :href="tagLink(t)">{{ t }}</a>
               </span>

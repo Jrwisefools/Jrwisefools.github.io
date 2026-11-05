@@ -1,14 +1,18 @@
 <script setup>
 /**
- * 标签页：顶部标签云做锚点导航，下方按标签分组列出文章。
+ * 按标签视图：顶部标签云做锚点导航，下方按标签分组列出文章。
  * 数据来自 tags.data.js，标签按篇数倒序。
  *
- * 锚点跳转用 JS 精确定位而不是依赖浏览器默认行为：
- * 浏览器会把 hash 解码后再匹配 id，而中文标签的 id 一旦用 encodeURIComponent
- * 就会变成字面量（tag-%E5%9F%BA%E7%A1%80），解码后对不上，导致中文标签点了没反应。
+ * 中文标签锚点不能依赖浏览器默认 hash 跳转：浏览器会先解码 hash 再匹配 id，
+ * 而 encodeURIComponent 生成的 id 是字面量，两者对不上。
+ * URL 解析统一交给 ContentLibrary，这里只负责展示与点击定位。
  */
 import { onMounted } from 'vue'
 import { data } from './tags.data.js'
+
+const props = defineProps({
+  focusTag: { type: String, default: '' }
+})
 
 const formatDate = (d) => {
   if (d == null) return ''
@@ -34,13 +38,11 @@ function scrollToTag(name) {
   history.replaceState(null, '', anchorHref(name))
 }
 
-// 从别处带 hash 直接进来时（/tags#tag-大模型）也定位到对应分组
+// 带 #tag-xxx 进来时定位到对应分组（标签名已由内容库容器解码）
 onMounted(() => {
-  const raw = decodeURIComponent(window.location.hash.replace(/^#/, ''))
-  if (!raw.startsWith('tag-')) return
-  const name = raw.slice(4)
+  if (!props.focusTag) return
   requestAnimationFrame(() => {
-    const el = document.getElementById(anchorId(name))
+    const el = document.getElementById(anchorId(props.focusTag))
     if (el) el.scrollIntoView({ block: 'start' })
   })
 })
@@ -48,10 +50,7 @@ onMounted(() => {
 
 <template>
   <div class="tags-index">
-    <p class="notes-stat">
-      共 <strong>{{ data.total }}</strong> 个标签，覆盖 <strong>{{ data.postTotal }}</strong> 篇内容
-    </p>
-
+    <!-- 统一统计由 ContentLibrary 输出 -->
     <div class="tag-cloud">
       <a
         v-for="t in data.tags"
@@ -77,9 +76,7 @@ onMounted(() => {
       <ul class="note-list">
         <li v-for="p in t.posts" :key="p.url">
           <a :href="p.url">{{ p.title }}</a>
-          <em class="doc-badge" :class="{ raw: p.archived }">
-            {{ p.archived ? '课堂速记' : '已整理' }}
-          </em>
+          <em v-if="p.archived" class="doc-badge raw">课堂笔记</em>
           <span class="note-date">{{ formatDate(p.date) }}</span>
         </li>
       </ul>

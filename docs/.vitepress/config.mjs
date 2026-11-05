@@ -55,11 +55,11 @@ export default defineConfig({
     // 导航栏左上角显示站点名（与右上角的头像 + 作者名「路中麋鹿」是同一品牌的
     // 两种呈现：左边是站名，右边是身份入口）
     siteTitle: '路中麋鹿',
+    // 内容统一由 /notes/ 一个入口承载；按标签、按时间是页内视图，不再各占一项导航
     nav: [
       { text: '首页', link: '/' },
-      { text: '笔记', link: '/notes/' },
-      { text: '标签', link: '/tags' },
-      { text: '归档', link: '/archive' },
+      // 旧入口 /tags、/archive 也渲染同一个内容库，让「笔记」保持选中态
+      { text: '笔记', link: '/notes/', activeMatch: '/(notes|tags|archive)' },
       { text: '关于', link: '/about' }
     ],
     socialLinks: [
@@ -82,12 +82,12 @@ export default defineConfig({
 
     sidebar: {
     '/notes/': [
-      { text: '笔记总览', link: '/notes/' },
+      { text: '全部笔记', link: '/notes/' },
       // collapsed 必须显式给出才会渲染折叠箭头（VitePress 判空决定是否可折叠）；
       // false = 默认展开但可手动收起
       ...TOPIC_GROUPS.map((g) => ({ text: g.text, collapsed: false, items: itemsOf(g.dir) })),
         {
-          text: '基础课归档',
+          text: '基础课',
           collapsed: true,
           items: ARCHIVE_GROUPS.map((g) => ({ text: g.text, items: itemsOf(g.dir) }))
         }

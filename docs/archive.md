@@ -1,12 +1,13 @@
 ---
-title: 归档
+title: 全部笔记
 date: 2026-10-17
-# 索引页：用 page 布局，去掉侧栏、右侧大纲与上下篇翻页
+# 旧地址入口：保留 /archive 让已分享的链接和历史书签不失效。
+# 内容与 /notes/ 完全相同，由同一个 ContentLibrary 组件渲染，默认停在「按时间」视图。
 layout: page
+sidebar: false
+aside: false
+prev: false
+next: false
 ---
 
-# 归档
-
-按记录时间倒序排列的全部内容，还原这条从 Python 基础一路走到 LangGraph 的学习时间线。
-
-<ArchiveIndex />
+<ContentLibrary initial-view="timeline" />

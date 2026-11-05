@@ -5,6 +5,7 @@ import HeroHome from './HeroHome.vue'
 import HeroAvatar from './HeroAvatar.vue'
 import PostList from './PostList.vue'
 import ProjectCards from './ProjectCards.vue'
+import ContentLibrary from './ContentLibrary.vue'
 import NotesIndex from './NotesIndex.vue'
 import TagsIndex from './TagsIndex.vue'
 import ArchiveIndex from './ArchiveIndex.vue'
@@ -18,6 +19,7 @@ export default {
     app.component('HeroAvatar', HeroAvatar)
     app.component('PostList', PostList)
     app.component('ProjectCards', ProjectCards)
+    app.component('ContentLibrary', ContentLibrary)
     app.component('NotesIndex', NotesIndex)
     app.component('TagsIndex', TagsIndex)
     app.component('ArchiveIndex', ArchiveIndex)

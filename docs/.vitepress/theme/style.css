@@ -1468,3 +1468,102 @@ body.lb-open {
     padding: 20px;
   }
 }
+
+/* ========== 统一内容库（/notes/ 与旧入口 /tags、/archive 共用） ========== */
+
+.content-library {
+  max-width: 760px;
+}
+
+.library-head {
+  margin-bottom: 28px;
+}
+
+.library-head h1 {
+  font-size: 1.9rem;
+  font-weight: var(--c-fw-title);
+  color: var(--c-text-1);
+  margin: 0 0 10px;
+}
+
+.library-intro {
+  font-size: 0.95rem;
+  line-height: var(--c-lh-body);
+  color: var(--c-text-2);
+  margin: 0 0 14px;
+}
+
+.library-head .notes-stat {
+  margin-bottom: 0;
+}
+
+/* 分段切换器：细边框药丸，不做成卡片，避免和内容区抢层次 */
+.view-switch {
+  display: inline-flex;
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid var(--c-border);
+  border-radius: var(--c-radius-pill);
+  background: var(--c-surface);
+  margin-bottom: 14px;
+}
+
+.view-tab {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--c-text-3);
+  font: inherit;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  padding: 7px 18px;
+  border-radius: var(--c-radius-pill);
+  cursor: pointer;
+  transition: color 0.18s var(--c-ease), background-color 0.18s var(--c-ease);
+}
+
+.view-tab:hover {
+  color: var(--c-brand);
+}
+
+.view-tab.active {
+  background: var(--c-brand);
+  color: var(--c-btn-text);
+  font-weight: 600;
+}
+
+.view-tab:focus-visible {
+  outline: 2px solid var(--c-brand);
+  outline-offset: 2px;
+}
+
+.view-desc {
+  font-size: 0.875rem;
+  color: var(--c-text-3);
+  margin: 0 0 28px;
+  min-height: 1.4em;
+}
+
+/* 三个视图共用容器宽度，取消各自原来的 max-width */
+.notes-index,
+.tags-index,
+.archive-index {
+  max-width: none;
+}
+
+@media (max-width: 640px) {
+  .library-head h1 {
+    font-size: 1.6rem;
+  }
+
+  .view-switch {
+    display: flex;
+    width: 100%;
+  }
+
+  .view-tab {
+    flex: 1;
+    padding: 8px 6px;
+    text-align: center;
+  }
+}

@@ -1,12 +1,13 @@
 ---
-title: 标签
+title: 全部笔记
 date: 2026-10-17
-# 这是索引页而非文章：用 page 布局，去掉侧栏、右侧大纲与上下篇翻页
+# 旧地址入口：保留 /tags 让已分享的链接和历史书签不失效。
+# 内容与 /notes/ 完全相同，由同一个 ContentLibrary 组件渲染，默认停在「按标签」视图。
 layout: page
+sidebar: false
+aside: false
+prev: false
+next: false
 ---
 
-# 标签
-
-按标签横向浏览全部内容。相比按主题目录翻阅，标签更容易把散在不同阶段的知识点串起来。
-
-<TagsIndex />
+<ContentLibrary initial-view="tags" />

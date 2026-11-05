@@ -17,7 +17,10 @@ const KEY = 'vp-notes-sidebar-collapsed'
 const route = useRoute()
 const collapsed = ref(false)
 
-const show = computed(() => route.path.startsWith('/notes/'))
+// 内容库索引页用 layout: page 且 sidebar: false，本身没有侧栏，开关只在文章页出现
+const show = computed(
+  () => route.path.startsWith('/notes/') && !/^\/notes\/?$/.test(route.path)
+)
 
 onMounted(() => {
   collapsed.value = localStorage.getItem(KEY) === '1'

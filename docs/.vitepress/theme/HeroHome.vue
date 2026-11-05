@@ -24,7 +24,7 @@ const giteeUrl = 'https://gitee.com/luzhongmilu'
 
 const stats = computed(() => [
   { label: '篇笔记', value: notes.total ?? 0, to: '/notes/' },
-  { label: '个标签', value: tags.total ?? 0, to: '/tags' },
+  { label: '个标签', value: tags.total ?? 0, to: '/notes/?view=tags' },
   { label: '个项目', value: projects.length, to: '/about' }
 ])
 </script>
