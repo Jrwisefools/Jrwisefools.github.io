@@ -11,7 +11,8 @@ const TOPICS = [
   { key: 'deepagents', text: '深度智能体', desc: 'DeepAgents 多智能体与上下文工程', archived: false },
   { key: 'backend', text: '后端', desc: '协程与 FastAPI 服务开发', archived: false },
   { key: 'python', text: 'Python 基础', desc: '语法、面向对象与并发编程', archived: true },
-  { key: 'linux-mysql', text: 'Linux & MySQL', desc: '系统操作、Shell 与数据库', archived: true }
+  { key: 'linux-mysql', text: 'Linux & MySQL', desc: '系统操作、Shell 与数据库', archived: true },
+  { key: 'javase', text: 'Java SE 基础', desc: '语法、面向对象、异常、Stream 与集合', archived: true }
 ]
 
 export default createContentLoader('notes/**/*.md', {
