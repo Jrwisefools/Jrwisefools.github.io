@@ -2,8 +2,9 @@
 /**
  * 最新文章（杂志目录式）：
  * 序号 + 标题/描述 + 右对齐日期与标签，靠细分隔线组织节奏，不用卡片盒子。
- * 数据来自 posts.data.js（createContentLoader 聚合 posts 与 notes 下未被归档的 md），
- * 按日期倒序取前 5 条；目录为空时展示占位文案。
+ * 数据来自 posts.data.js（createContentLoader 聚合 posts 与 notes 下全部 md），
+ * 按日期倒序取全站最近 5 条；基础课归档同样参与日期排序，
+ * 目录为空时展示占位文案。
  */
 import { data } from './posts.data.js'
 import { tagLink } from './tagLink.js'

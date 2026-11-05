@@ -4,7 +4,7 @@
  *   左主栏：最新文章（卡片式）
  *   右侧栏：关于我 / 技能标签 / 项目作品
  * 数据接口：
- *   - posts.data.js  → 自动聚合 posts 与 notes 下未被归档的 md
+ *   - posts.data.js  → 自动聚合 posts 与 notes 下全部 md，按日期倒序
  *   - projects 数组  → 在 ProjectCards.vue 内直接编辑
  *   - avatar         → 若 docs/public/avatar.jpg 存在则显示图片，否则显示名字徽标
  */
