@@ -796,29 +796,7 @@ body {
   font-weight: 600;
 }
 
-.note-group {
-  margin-bottom: 32px;
-}
-
-.note-group h2 {
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: var(--c-text-1);
-  margin-bottom: 4px;
-}
-
-.note-group h3 {
-  font-size: 1.05rem;
-  font-weight: 600;
-  color: var(--c-text-1);
-  margin: 24px 0 4px;
-}
-
-.group-desc {
-  font-size: 0.9rem;
-  color: var(--c-text-3);
-  margin-bottom: 12px;
-}
+/* 分组标题现在统一由 CollapsibleGroup 渲染，样式见末尾「统一内容库」段落 */
 
 .note-list {
   list-style: none;
@@ -826,19 +804,40 @@ body {
   margin: 0;
 }
 
+/* 两列网格：标题在左、日期固定右对齐，标签另起一行，长标题也不会把元信息挤散 */
 .note-list li {
-  padding: 10px 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  column-gap: 16px;
+  row-gap: 8px;
+  padding: 12px 0;
   border-bottom: 1px solid var(--c-divider);
-  display: flex;
+}
+
+.note-list li:last-child {
+  border-bottom: none;
+}
+
+.note-list li > :first-child {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+/* 标题与「课堂笔记」标记同处一格，避免标记掉到下一行右侧孤零零挂着 */
+.note-title {
+  display: inline-flex;
   align-items: baseline;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 4px 10px;
+  min-width: 0;
 }
 
 .note-list a {
   color: var(--c-text-1);
   text-decoration: none;
   font-size: 1rem;
+  line-height: 1.55;
 }
 
 .note-list a:hover {
@@ -846,14 +845,25 @@ body {
 }
 
 .note-date {
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: end;
   color: var(--c-text-4);
   font-size: 0.82rem;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
 }
 
 .note-tags {
   display: inline-flex;
   gap: 6px;
   flex-wrap: wrap;
+}
+
+/* 网格定位只作用于内容库的列表，首页「最新文章」沿用原来的行内排布 */
+.view-panel .note-tags {
+  grid-column: 1 / -1;
+  grid-row: 2;
 }
 
 .note-tags em,
@@ -873,29 +883,7 @@ body {
   background: var(--c-surface);
 }
 
-/* 基础课归档折叠区 */
-.archive-block {
-  margin-top: 8px;
-  padding: 16px 20px;
-  border-radius: 10px;
-  background: var(--c-surface);
-  border: 1px solid var(--c-border);
-}
-
-.archive-block summary {
-  cursor: pointer;
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--c-text-2);
-}
-
-.archive-block .group-desc {
-  margin-top: 10px;
-}
-
-.archive-block .note-list a {
-  font-size: 0.95rem;
-}
+/* 基础课不再单独套一层 details：它和主内容一样是同级可折叠分组 */
 
 /* ========== 首页侧栏 ========== */
 
@@ -1049,13 +1037,26 @@ body {
   max-width: 760px;
 }
 
+.tag-cloud-wrap {
+  padding: 4px 0 26px;
+  border-bottom: 1px solid var(--c-divider);
+}
+
+.cloud-label {
+  margin: 0 0 14px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--c-text-4);
+}
+
 .tag-cloud {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 40px;
-  padding-bottom: 28px;
-  border-bottom: 1px solid var(--c-divider);
+  gap: 9px;
+  margin: 0;
+  padding: 0;
+  border: 0;
 }
 
 .tag-pill {
@@ -1063,43 +1064,30 @@ body {
   align-items: center;
   gap: 6px;
   padding: 5px 13px;
-  border-radius: 20px;
-  font-size: 0.85rem;
+  border-radius: var(--c-radius-pill);
+  font-size: 0.82rem;
   text-decoration: none;
   background: var(--c-tag);
   color: var(--c-text-3);
   border: 1px solid transparent;
-  transition: all 0.15s ease;
+  transition: color 0.18s var(--c-ease), border-color 0.18s var(--c-ease),
+    transform 0.18s var(--c-ease), box-shadow 0.18s var(--c-ease);
 }
 
 .tag-pill:hover {
   border-color: var(--c-brand);
   color: var(--c-brand);
+  transform: translateY(-1px);
+  box-shadow: var(--c-shadow-sm);
 }
 
 .tag-count {
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   color: var(--c-text-4);
+  font-variant-numeric: tabular-nums;
 }
 
-.tag-group {
-  margin-bottom: 34px;
-  scroll-margin-top: 80px;
-}
-
-.tag-group h2 {
-  font-size: 1.05rem;
-  font-weight: 600;
-  color: var(--c-text-1);
-  margin-bottom: 10px;
-}
-
-.tag-group-count {
-  font-size: 0.8rem;
-  font-weight: 400;
-  color: var(--c-text-4);
-  margin-left: 6px;
-}
+/* 标签 / 月份的分组标题同样走 CollapsibleGroup，样式见末尾内容库段落 */
 
 /* 整理度标识 */
 .doc-badge {
@@ -1118,6 +1106,11 @@ body {
   color: var(--c-text-4);
 }
 
+/* 弱标记跟在标题后面，不抢日期那一列 */
+.note-list .doc-badge {
+  flex-shrink: 0;
+}
+
 /* ========== 归档页 ========== */
 
 .archive-index {
@@ -1125,14 +1118,7 @@ body {
 }
 
 .archive-month {
-  margin-bottom: 32px;
-}
-
-.archive-month h2 {
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--c-text-1);
-  margin-bottom: 12px;
+  margin-bottom: 36px;
 }
 
 .archive-list {
@@ -1471,41 +1457,102 @@ body.lb-open {
 
 /* ========== 统一内容库（/notes/ 与旧入口 /tags、/archive 共用） ========== */
 
-.content-library {
-  max-width: 760px;
+/* ContentLibrary 被 Vue 的 Content 包了两层 div：.VPPage > * 的居中规则够不着它，
+   窄屏下包装层还会按内容宽度收缩、把右对齐的日期和篇数挤出视口。
+   这里把包装层显式撑满，居中交给 .content-library 自己。 */
+.VPPage:has(.content-library) > *,
+.VPPage:has(.content-library) > * > * {
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
 }
 
+.content-library {
+  max-width: 860px;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+
+/* ---- 头部：小标签 + 大标题 + 一句说明，三层拉开字级 ---- */
 .library-head {
   margin-bottom: 28px;
 }
 
+.library-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 16px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: var(--c-brand);
+}
+
+.library-eyebrow::before {
+  content: '';
+  width: 24px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--c-brand);
+}
+
+.library-eyebrow span {
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  color: var(--c-text-4);
+}
+
 .library-head h1 {
-  font-size: 1.9rem;
+  font-size: clamp(2rem, 4.4vw, 2.5rem);
   font-weight: var(--c-fw-title);
+  letter-spacing: -0.035em;
+  line-height: 1.2;
   color: var(--c-text-1);
-  margin: 0 0 10px;
+  margin: 0 0 16px;
 }
 
 .library-intro {
+  max-width: 640px;
   font-size: 0.95rem;
   line-height: var(--c-lh-body);
   color: var(--c-text-2);
-  margin: 0 0 14px;
+  margin: 0;
 }
 
-.library-head .notes-stat {
-  margin-bottom: 0;
+/* ---- 工具栏：左边选看法、右边给总量 ---- */
+.library-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  padding: 16px 0;
+  border-top: 1px solid var(--c-divider);
+}
+
+.library-toolbar .notes-stat {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--c-text-4);
+  font-variant-numeric: tabular-nums;
+}
+
+.library-toolbar .notes-stat strong {
+  color: var(--c-brand);
+  font-size: 0.95rem;
+  font-weight: 700;
 }
 
 /* 分段切换器：细边框药丸，不做成卡片，避免和内容区抢层次 */
 .view-switch {
   display: inline-flex;
   gap: 2px;
-  padding: 3px;
+  padding: 4px;
   border: 1px solid var(--c-border);
   border-radius: var(--c-radius-pill);
-  background: var(--c-surface);
-  margin-bottom: 14px;
+  background: var(--c-accent-soft);
 }
 
 .view-tab {
@@ -1516,10 +1563,11 @@ body.lb-open {
   font: inherit;
   font-size: 0.875rem;
   line-height: 1.4;
-  padding: 7px 18px;
+  padding: 8px 22px;
   border-radius: var(--c-radius-pill);
   cursor: pointer;
-  transition: color 0.18s var(--c-ease), background-color 0.18s var(--c-ease);
+  transition: color 0.18s var(--c-ease), background-color 0.18s var(--c-ease),
+    box-shadow 0.18s var(--c-ease);
 }
 
 .view-tab:hover {
@@ -1530,6 +1578,7 @@ body.lb-open {
   background: var(--c-brand);
   color: var(--c-btn-text);
   font-weight: 600;
+  box-shadow: var(--c-shadow-sm);
 }
 
 .view-tab:focus-visible {
@@ -1537,33 +1586,352 @@ body.lb-open {
   outline-offset: 2px;
 }
 
-.view-desc {
-  font-size: 0.875rem;
-  color: var(--c-text-3);
-  margin: 0 0 28px;
-  min-height: 1.4em;
+/* 视图说明与「展开全部 / 收起全部」同一行 */
+.library-subbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  min-height: 36px;
 }
 
-/* 三个视图共用容器宽度，取消各自原来的 max-width */
+.view-desc {
+  font-size: 0.8125rem;
+  color: var(--c-text-4);
+  margin: 0;
+}
+
+.bulk-toggle {
+  appearance: none;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--c-text-3);
+  font: inherit;
+  font-size: 0.8125rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.18s var(--c-ease), background-color 0.18s var(--c-ease),
+    border-color 0.18s var(--c-ease);
+}
+
+.bulk-toggle:hover {
+  color: var(--c-brand);
+  background: var(--c-accent-soft);
+  border-color: var(--c-border);
+}
+
+.bulk-toggle:focus-visible {
+  outline: 2px solid var(--c-brand);
+  outline-offset: 2px;
+}
+
+.bulk-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 15px;
+  height: 15px;
+  border: 1px solid currentColor;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  line-height: 1;
+  font-style: normal;
+}
+
+.view-panel {
+  border-top: 1px solid var(--c-divider);
+  margin-top: 6px;
+  padding-top: 8px;
+}
+
+/* 三个视图共用容器宽度、各自从 01 开始编号 */
 .notes-index,
 .tags-index,
 .archive-index {
   max-width: none;
+  counter-reset: lib-group;
+}
+
+/* ---- 可折叠大标题：序号 / 标题+描述 / 篇数+箭头 ---- */
+.lib-group {
+  counter-increment: lib-group;
+  scroll-margin-top: 88px;
+}
+
+.lib-group + .lib-group {
+  border-top: 1px solid var(--c-divider);
+}
+
+.group-head {
+  position: relative;
+  appearance: none;
+  border: 0;
+  background: transparent;
+  width: 100%;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr) auto;
+  align-items: center;
+  column-gap: 14px;
+  padding: 18px 12px 18px 18px;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.2s var(--c-ease);
+}
+
+.group-head:hover {
+  background: var(--c-accent-soft);
+}
+
+.group-head:focus-visible {
+  outline: 2px solid var(--c-brand);
+  outline-offset: -2px;
+}
+
+/* 展开时标题左侧浮出一条品牌色竖线 */
+.group-head::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 2px;
+  height: 0;
+  border-radius: 2px;
+  background: var(--c-brand);
+  transform: translateY(-50%);
+  transition: height 0.24s var(--c-ease);
+}
+
+.lib-group.open .group-head::before {
+  height: 26px;
+}
+
+.group-index {
+  justify-self: start;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--c-text-4);
+  font-variant-numeric: tabular-nums;
+  transition: color 0.18s var(--c-ease);
+}
+
+.group-index::before {
+  content: counter(lib-group, decimal-leading-zero);
+}
+
+.lib-group.open .group-index {
+  color: var(--c-brand);
+}
+
+.group-heading {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.group-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.35;
+  color: var(--c-text-1);
+  transition: color 0.18s var(--c-ease);
+}
+
+.group-head:hover .group-title {
+  color: var(--c-brand);
+}
+
+.group-desc {
+  font-size: 0.8125rem;
+  line-height: 1.55;
+  color: var(--c-text-3);
+}
+
+.group-tail {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.group-count {
+  font-size: 0.78rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--c-text-4);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.group-chevron {
+  width: 8px;
+  height: 8px;
+  flex: none;
+  border-right: 1.5px solid var(--c-text-4);
+  border-bottom: 1.5px solid var(--c-text-4);
+  transform: rotate(45deg);
+  transition: transform 0.24s var(--c-ease), border-color 0.18s var(--c-ease);
+}
+
+.lib-group.open .group-chevron {
+  transform: rotate(225deg);
+  border-color: var(--c-brand);
+}
+
+.group-head:hover .group-chevron {
+  border-color: var(--c-brand);
+}
+
+/* grid 0fr → 1fr 做高度过渡；内容始终在 DOM 里，收起时不可见也不可聚焦 */
+.group-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  visibility: hidden;
+  transition: grid-template-rows 0.28s var(--c-ease), visibility 0s linear 0.28s;
+}
+
+.group-panel.open {
+  grid-template-rows: 1fr;
+  visibility: visible;
+  transition: grid-template-rows 0.28s var(--c-ease), visibility 0s;
+}
+
+.group-panel-inner {
+  min-height: 0;
+  overflow: hidden;
+  padding-left: 48px;
+}
+
+.group-panel-inner > .note-list,
+.group-panel-inner > .archive-list {
+  margin-bottom: 22px;
+}
+
+/* 基础课分区：一条上分隔线加小标签，不套外层卡片 */
+.section-label {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 30px 0 4px;
+  padding: 24px 0 10px 18px;
+  border-top: 1px solid var(--c-divider);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--c-text-3);
+}
+
+.section-label-note {
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--c-text-4);
+}
+
+/* 列表行：hover 淡染 + 左侧细强调线，仍保持细线列表、不做成卡片 */
+.note-list li,
+.archive-list li {
+  position: relative;
+  transition: background-color 0.18s var(--c-ease);
+}
+
+.note-list li:hover,
+.archive-list li:hover {
+  background: var(--c-accent-soft);
+}
+
+.note-list li::before {
+  content: '';
+  position: absolute;
+  left: -14px;
+  top: 50%;
+  width: 2px;
+  height: 18px;
+  border-radius: 2px;
+  background: var(--c-brand);
+  transform: translateY(-50%) scaleY(0);
+  transition: transform 0.18s var(--c-ease);
+}
+
+.note-list li:hover::before {
+  transform: translateY(-50%) scaleY(1);
 }
 
 @media (max-width: 640px) {
   .library-head h1 {
-    font-size: 1.6rem;
+    font-size: 1.85rem;
   }
 
+  .library-toolbar {
+    align-items: flex-start;
+  }
+
+  /* 三等分网格，保证窄屏下三个视图按钮都能完整显示 */
   .view-switch {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     width: 100%;
+    box-sizing: border-box;
   }
 
   .view-tab {
-    flex: 1;
-    padding: 8px 6px;
+    width: 100%;
+    min-width: 0;
+    padding: 8px 4px;
     text-align: center;
+  }
+
+  .group-head {
+    grid-template-columns: 22px minmax(0, 1fr) auto;
+    column-gap: 10px;
+    padding: 16px 4px 16px 14px;
+  }
+
+  .group-title {
+    font-size: 1.05rem;
+  }
+
+  .group-desc {
+    font-size: 0.78rem;
+  }
+
+  .group-tail {
+    gap: 9px;
+  }
+
+  .group-panel-inner {
+    padding-left: 0;
+  }
+
+  .note-list li {
+    column-gap: 10px;
+  }
+
+  .note-list li::before {
+    display: none;
+  }
+
+  .section-label {
+    padding-left: 4px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .group-panel,
+  .group-panel.open,
+  .group-head::before,
+  .group-chevron,
+  .view-tab,
+  .tag-pill,
+  .note-list li::before {
+    transition: none;
   }
 }
