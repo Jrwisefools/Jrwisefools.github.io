@@ -2142,3 +2142,50 @@ body.lb-open {
     transition: none;
   }
 }
+
+/* 页面切换过渡（配合 PageTransition.vue）
+ * 顶部 2px 细进度条：把「等页面 chunk」这段时间变成可见反馈；
+ * 内容区的淡入上浮由 Web Animations 一次性播放，不写在 CSS 里，
+ * 避免组件复用时动画反复重播。颜色一律走 --c-brand，深浅色通用。 */
+.page-progress {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 2px;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s var(--c-ease);
+}
+
+.page-progress.is-running {
+  opacity: 1;
+}
+
+.page-progress > span {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: var(--c-brand);
+  box-shadow: 0 0 10px var(--c-brand);
+  transition: width 0.5s var(--c-ease);
+}
+
+.page-progress.is-running > span {
+  width: 82%;
+}
+
+.page-progress.is-done > span {
+  width: 100%;
+  transition-duration: 0.2s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-progress,
+  .page-progress > span {
+    transition: none;
+  }
+
+  .page-progress.is-running > span {
+    width: 100%;
+  }
+}
