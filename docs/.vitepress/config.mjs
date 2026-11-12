@@ -48,7 +48,7 @@ export default defineConfig({
   title: '路中麋鹿',
   description: '路中麋鹿：RAG、大模型应用与 FastAPI 后端的学习笔记',
 
-  // 浏览器标签页图标用主题鲨鱼（64px 缩放版；原图 theme-shark.png 仅导航栏用）
+  // 浏览器标签页图标用主题鲨鱼（64px 缩放版）；796px 原始素材见 design-assets/
   head: [['link', { rel: 'icon', href: '/favicon.png' }]],
 
   themeConfig: {

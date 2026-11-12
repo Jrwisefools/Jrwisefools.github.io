@@ -8,11 +8,12 @@
  * HTML 不合法，浏览器会拆断 DOM。
  *
  * 悬停放大，键盘 focus 同样生效，尊重 prefers-reduced-motion。
- * 换图直接替换 docs/public/theme-shark.png 即可。
+ * 显示仅 40px，所以用 128px 的缩放版（Retina 2x~3x 都够清晰），
+ * 体积从 369KB 降到约 16KB；796px 原始素材见 design-assets/theme-shark-original.png。
  */
 import { withBase } from 'vitepress'
 
-const src = withBase('/theme-shark.png')
+const src = withBase('/theme-shark-nav.png')
 </script>
 
 <template>
