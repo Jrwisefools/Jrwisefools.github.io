@@ -55,6 +55,11 @@
   --vp-c-brand-2: var(--c-brand-hover);
   --vp-c-nav-bg: var(--c-bg);
   --vp-c-nav-screen-bg: var(--c-bg);
+  /* VitePress 1.6 用 --vp-nav-bg-color 给固定导航栏铺底（.VPNavBar:not(.home)）。
+     主题覆盖了大部分 --vp-c-* 变量，漏掉这个新变量时 background-color 解析为
+     无效值 → 文章页导航栏整层透明，滚动时下方正文直接透上来（窗口模式 ≥960px）。
+     首页 .home.top 不匹配该规则，Hero 光晕不受影响。 */
+  --vp-nav-bg-color: var(--c-bg);
   --vp-c-border: var(--c-border);
   --vp-c-divider: var(--c-divider);
 }
@@ -696,6 +701,9 @@ body {
   html.notes-sidebar-collapsed .VPNavBar.has-sidebar .title {
     position: static;
     width: auto;
+    /* VitePress 让标题区透明、靠 .VPSidebar 从 y=0 铺底；侧栏收起后
+       下面没有背景了，滚动时正文会从标题右侧那块透上来，必须自己铺底。 */
+    background-color: var(--vp-nav-bg-color);
   }
 
   html.notes-sidebar-collapsed .VPNavBar.has-sidebar .content {
