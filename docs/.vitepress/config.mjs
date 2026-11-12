@@ -19,7 +19,9 @@ const TOPIC_GROUPS = [
 const ARCHIVE_GROUPS = [
   { dir: 'python', text: 'Python 基础', desc: '语法、面向对象与并发编程' },
   { dir: 'linux-mysql', text: 'Linux & MySQL', desc: '系统操作、Shell 与数据库' },
-  { dir: 'javase', text: 'Java SE 基础', desc: '语法、面向对象、异常、Stream 与集合' }
+  { dir: 'javase', text: 'Java SE 基础', desc: '语法、面向对象、异常、Stream 与集合' },
+  { dir: 'frontend', text: '前端基础', desc: 'HTML、CSS、JavaScript、DOM 与 BOM' },
+  { dir: 'javaweb', text: 'JavaWeb', desc: 'JDBC、Tomcat、Servlet、会话技术与三层架构' }
 ]
 
 // 从 frontmatter 取标题，取不到就退回文件名
