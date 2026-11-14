@@ -83,15 +83,20 @@ description: "HttpServletRequest 获取请求参数与请求头、请求转发�
   - 当GET方式提交的参数URL编码和tomcat10.1.7默认的URI编码不一致时,就会出现乱码
 - 方式1 : 设置GET方式提交的编码和Tomcat10.1.7的URI默认解析编码一致
 
-  > **补充整理**：原文此处配一张 IDE 设置截图（有道云笔记资源已失效，图存不下来了）。
-  > 做法是把页面/提交端使用的字符集（如 HTML 的 `<meta charset>` 或表单页编码）
-  > 设置成与 Tomcat 默认 URI 解析编码 UTF-8 一致，GET 参数就不用转来转去。
+  ![GET 方式1：页面声明 UTF-8，表单以 get 提交，控制台正常输出中文](/images/javaweb/get-encoding-way1.png)
+
+  > **补充整理**：页面用 `<meta charset="UTF-8">` 声明后，GET 参数的 URL 编码
+  > 就与 Tomcat 10.1.7 默认的 URI 解析编码 UTF-8 对齐，不用改服务端。
 
 - 方式2 : 设置Tomcat10.1.7的URI解析字符集和GET请求发送时所使用URL转码时的字符集一致即可
 
-  > **补充整理**：原文此处配两张配置截图（有道云笔记资源已失效）。思路是反过来改
-  > Tomcat 侧：在 `server.xml` 的 Connector 上加 `URIEncoding="页面所用字符集"`
-  > （老版本 Tomcat 常见写法），让 URI 解析编码迁就提交端。两边字符集对上，乱码即消失。
+  ![GET 方式2：在 Tomcat 的 conf 目录找到 server.xml](/images/javaweb/get-encoding-way2.png)
+
+  ![GET 方式2：在 Connector 上添加 URIEncoding，指定为提交端所用的 GBK](/images/javaweb/get-encoding-way2b.png)
+
+  > **补充整理**：反过来改 Tomcat 侧，在 `server.xml` 的 Connector 上加
+  > `URIEncoding="页面所用字符集"`，让 URI 解析编码迁就提交端。图中写的是 `GBK`，
+  > 因为这一节的示例页面改用了 GBK 提交；两边对上，乱码即消失。
 
 - POST请求乱码分析
   - POST请求将参数放在请求体中进行发送
@@ -100,14 +105,18 @@ description: "HttpServletRequest 获取请求参数与请求头、请求转发�
   - 如果请求体的URL转码和Tomcat的请求体解析编码不一致,就容易出现乱码
 - 方式1 : 请求时,使用UTF-8字符集提交请求体 (推荐)
 
-  > **补充整理**：原文此处配图已失效。即保证页面以 UTF-8 提交（`<meta charset="UTF-8">`），
-  > 与 Tomcat 默认的请求体解析编码一致，后端无需任何额外处理。
+  ![POST 方式1：页面声明 UTF-8，表单改为 method=POST](/images/javaweb/post-encoding-way1.png)
+
+  > **补充整理**：保证页面以 UTF-8 提交（`<meta charset="UTF-8">`），与 Tomcat
+  > 默认的请求体解析编码一致，后端无需任何额外处理。
 
 - 方式2 : 后端在获取参数前,设置解析请求体使用的字符集和请求发送时使用的字符集一致 (不推荐)
 
-  > **补充整理**：原文此处配图已失效。做法是在读取参数前先调用
-  > `request.setCharacterEncoding("页面字符集")`，只对请求体（POST）有效；
-  > 不推荐是因为它把编码约定散落在每个 Servlet 里，漏写一处就乱码。
+  ![POST 方式2：读取参数前先调用 setCharacterEncoding](/images/javaweb/post-encoding-way2.png)
+
+  > **补充整理**：读取参数前先调用 `req.setCharacterEncoding("GBK")`，只对请求体
+  > （POST）有效，且必须放在所有 `getParameter()` 之前。不推荐是因为编码约定散落在
+  > 每个 Servlet 里，漏写一处就乱码。
 
 ## 请求转发
 
