@@ -21,7 +21,7 @@ Servlet做的事太多了：
 
 > 三层架构
 
-![image.png](https://note.youdao.com/yws/public/resource/7ced6d6a489dcbea5811f91e71134a68/WEB8c4ddefcf24218e7a6944b8af9e920f3/WEBRESOURCEb1fe6f59982c657c08706a180be33ed3?ynotemdtimestamp=1794401450276)
+![image.png](/images/javaweb/three-tier-architecture.png)
 控制层：controller
 1，处理请求、
 4，渲染页面
@@ -43,7 +43,7 @@ Servlet做的事太多了：
 
 > MVC
 
-![image.png](https://note.youdao.com/yws/public/resource/7ced6d6a489dcbea5811f91e71134a68/WEB8c4ddefcf24218e7a6944b8af9e920f3/WEBRESOURCEb907f9cce1d64a1e961c01a2811660ed?ynotemdtimestamp=1794401450276)
+![image.png](/images/javaweb/mvc-pattern.png)
 M:model
 承载数据的载体
 
@@ -58,4 +58,4 @@ C:controller
 
 > 前后端分离
 
-![image.png](https://note.youdao.com/yws/public/resource/7ced6d6a489dcbea5811f91e71134a68/WEB8c4ddefcf24218e7a6944b8af9e920f3/WEBRESOURCE58e18292f9be8ada16aceb982b6768d4?ynotemdtimestamp=1794401450276)
+![image.png](/images/javaweb/front-back-separation.png)

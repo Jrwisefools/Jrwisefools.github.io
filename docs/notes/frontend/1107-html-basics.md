@@ -342,7 +342,7 @@ html文件的后缀可以是html或htm
   - 表单可以将页面上录入的信息携带到服务器端。
   - `<form></form>`标签来定义表单
 - 需求
-  - ![image](https://note.youdao.com/yws/public/resource/9bd539ebd1c1bff0672cfb820c28533e/WEB4204d9bc4e3c42019a882b45269dc6f1/WEBRESOURCE2792602002c944908199fc66f39479bd?ynotemdtimestamp=1794013228150)
+  - ![image](/images/frontend/form-requirement.png)
 
 ## rm 表单核心属性
 

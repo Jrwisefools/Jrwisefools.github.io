@@ -299,7 +299,7 @@ description: "CSS 与 HTML 的三种结合方式、基本与复合选择器、�
 - 概念
   - CSS 字体属性允许您设置字体系列 (font-family) 和字体加粗 (font-weight)，您还可以设置字体的大小、字体风格（如斜体）和字体变形（如小型大写字母）。
 - 常用属性
-  - ![image](https://note.youdao.com/yws/public/resource/9bd539ebd1c1bff0672cfb820c28533e/WEBb99c40bde5564a358ff7a581b75bc33d/WEBRESOURCE9f81226e89904cda937ec3b4d39ebcab?ynotemdtimestamp=1794032126656)
+  - ![image](/images/frontend/css-font-properties.png)
 - 需求
   - 使用字体属性对p标签进行修饰
 
@@ -308,7 +308,7 @@ description: "CSS 与 HTML 的三种结合方式、基本与复合选择器、�
 - 概述
   - 可以改变文本的颜色、字符间距，对齐文本，装饰文本，对文本进行缩进，等等。
 - 常用属性
-  - ![image](https://note.youdao.com/yws/public/resource/9bd539ebd1c1bff0672cfb820c28533e/WEBb99c40bde5564a358ff7a581b75bc33d/WEBRESOURCE0ef6d69ed35e44eda5801ce007dc6161?ynotemdtimestamp=1794032126656)
+  - ![image](/images/frontend/css-text-properties.png)
 - 需求
   - 结合文本属性和字体属性写一封情书，要求如下：
     - 标题：字号3em，颜色红色，居中，楷体。

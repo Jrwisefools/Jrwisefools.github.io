@@ -172,7 +172,7 @@ description: "Filter 的概念、生命周期、配置方式、执行顺序，�
 
 - 概述
 
-  - ![image](https://note.youdao.com/yws/public/resource/7ced6d6a489dcbea5811f91e71134a68/WEB4acc0e09ec744dfca5965d0c5e38bb99/WEBRESOURCEa88ef69c09fd422087f4c1cd59cc4b8f?ynotemdtimestamp=1794195139012)
+  - ![image](/images/javaweb/filter-chain.png)
   - 一个请求可能被多个过滤器所过滤，只有当所有过滤器都放行，请求才能到达目标资源，如果有某一个过滤器没有放行，那么请求则无法到达后续过滤器以及目标资源，多个过滤器组成的链路就是过滤器链
 
 - 执行顺序

@@ -30,12 +30,12 @@ description: "Servlet 的概念与生命周期、继承体系、web.xml 与注�
 ## Servlet执行流程
 
 - 执行流程
-  ![image](https://note.youdao.com/yws/public/resource/7ced6d6a489dcbea5811f91e71134a68/WEB831785b53f814cf3a655cae3a44333c2/WEBRESOURCE611e55666fb84a13bbef083bf28da1cb?ynotemdtimestamp=1794194934012)
+  ![image](/images/javaweb/servlet-execution-flow.png)
 
 ## 03_Servlet关系视图
 
 - 关系结构
-  ![image](https://note.youdao.com/yws/public/resource/7ced6d6a489dcbea5811f91e71134a68/WEB831785b53f814cf3a655cae3a44333c2/WEBRESOURCE0dd8139cc91a4b59800358ddd3d764f7?ynotemdtimestamp=1794194934012)
+  ![image](/images/javaweb/servlet-relation-view.png)
 
 ## Servlet的其他两种实现方式
 
@@ -107,11 +107,11 @@ description: "Servlet 的概念与生命周期、继承体系、web.xml 与注�
 ## 09_服务器资源的路径问题
 
 - 需求1 : 在demo01.html访问girl.jpg
-  - ![image.png](https://note.youdao.com/yws/public/resource/7ced6d6a489dcbea5811f91e71134a68/WEB831785b53f814cf3a655cae3a44333c2/WEBRESOURCE47e1d06b099746e4985290787b0a6a49?ynotemdtimestamp=1794194934012)
+  - ![image.png](/images/javaweb/resource-path-case1.png)
 - 需求2 : 在demo01.html访问girl.jpg
-  - ![image.png](https://note.youdao.com/yws/public/resource/7ced6d6a489dcbea5811f91e71134a68/WEB831785b53f814cf3a655cae3a44333c2/WEBRESOURCE82b84e14833d4368a44cc30a49d48e19?ynotemdtimestamp=1794194934012)
+  - ![image.png](/images/javaweb/resource-path-case2.png)
 - 需求3 : 在demo01.html访问girl.jpg
-  - ![image.png](https://note.youdao.com/yws/public/resource/7ced6d6a489dcbea5811f91e71134a68/WEB831785b53f814cf3a655cae3a44333c2/WEBRESOURCE9074475b76134f6e8ac5ed52b4f58e31?ynotemdtimestamp=1794194934012)
+  - ![image.png](/images/javaweb/resource-path-case3.png)
 
 ## 10_ServletConfig对象
 

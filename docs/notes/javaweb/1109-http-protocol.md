@@ -51,10 +51,10 @@ description: "HTTP 协议概述、请求行/请求头/请求体、响应行/响�
     - HTTP/3 带来了革命性的变化，以提高 Web 性能和安全性。设置 HTTP/3 网站需要服务器和浏览器支持。
     - 目前，谷歌云、Cloudflare和Fastly支持 HTTP/3。Chrome、Firefox、Edge、Opera 和一些移动浏览器支持 HTTP/3。
 - 会话方式
-  - ![image.png](https://note.youdao.com/yws/public/resource/7ced6d6a489dcbea5811f91e71134a68/WEBa522be72c4dc41ce9f5703f202be01ae/WEBRESOURCEc68e86a6a78f42a7a68a108c8bd968a3?ynotemdtimestamp=1794194900030)
+  - ![image.png](/images/javaweb/http-session-mode.png)
   - 浏览器与WEB服务器的连接过程是短暂的，每次连接只处理一个请求和响应。对每一个页面的访问，浏览器与WEB服务器都要建立一次单独的连接。
 - HTTP1.0和HTTP1.1的区别
-  - ![image.png](https://note.youdao.com/yws/public/resource/7ced6d6a489dcbea5811f91e71134a68/WEBa522be72c4dc41ce9f5703f202be01ae/WEBRESOURCE7813fa9cd03e4172a09be03ffe7caca8?ynotemdtimestamp=1794194900030)
+  - ![image.png](/images/javaweb/http1-0-vs-1-1.png)
   - 在HTTP1.0版本中，浏览器请求一个带有图片的网页，会由于下载图片而与服务器之间开启一个新的连接；但在HTTP1.1版本中，允许浏览器在拿到当前请求对应的全部资源后再断开连接，提高了效率。
 - 在浏览器中通过F12工具抓取请求响应报文包
   - 几乎所有的PC端浏览器都支持了F12开发者工具,只不过不同的浏览器工具显示的窗口有差异
@@ -63,7 +63,7 @@ description: "HTTP 协议概述、请求行/请求头/请求体、响应行/响�
 
 - 概述
 
-  - ![image.png](https://note.youdao.com/yws/public/resource/7ced6d6a489dcbea5811f91e71134a68/WEBa522be72c4dc41ce9f5703f202be01ae/WEBRESOURCEe0be4818c08d445dadfdc115d9d50238?ynotemdtimestamp=1794194900030)
+  - ![image.png](/images/javaweb/http-request-message.png)
   - 请求行
   - 请求头(可选)
   - 空行
@@ -123,7 +123,7 @@ description: "HTTP 协议概述、请求行/请求头/请求体、响应行/响�
 
 - 概述
 
-  - ![image.png](https://note.youdao.com/yws/public/resource/7ced6d6a489dcbea5811f91e71134a68/WEBa522be72c4dc41ce9f5703f202be01ae/WEBRESOURCEb663fe8ed60048cab8261a2b8e12afd8?ynotemdtimestamp=1794194900030)
+  - ![image.png](/images/javaweb/http-response-message.png)
   - 响应行
   - 若干响应头(可选)
   - 空行

@@ -34,7 +34,7 @@ description: "Session 的原理、与 Cookie 的关系、常用 API、生命周�
 
 ## session执行流程
 
-![image.png](https://note.youdao.com/yws/public/resource/7ced6d6a489dcbea5811f91e71134a68/WEBe2a94add9cfe45919385ba5f0245f934/WEBRESOURCE94f4f1524efe46a087e37aacf80349d1?ynotemdtimestamp=1794195112338)
+![image.png](/images/javaweb/session-execution-flow.png)
 
 ## 04_session相关配置
 
@@ -68,4 +68,4 @@ void invalidate();
 
 ### 需求
 
-![image.png](https://note.youdao.com/yws/public/resource/7ced6d6a489dcbea5811f91e71134a68/WEBe2a94add9cfe45919385ba5f0245f934/WEBRESOURCEa398701075ee4e3ab84ecefe0051e4f3?ynotemdtimestamp=1794195112338)
+![image.png](/images/javaweb/session-login-requirement.png)

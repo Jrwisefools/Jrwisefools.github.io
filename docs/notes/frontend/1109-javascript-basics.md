@@ -110,16 +110,16 @@ description: "JavaScript 的定位、引入方式、变量与数据类型、运�
 ## 07_ECMAScript之运算符
 
 - 算术运算符
-  ![image](https://note.youdao.com/yws/public/resource/9bd539ebd1c1bff0672cfb820c28533e/WEBf1cf46d4fb00442687a8d30c1835182b/WEBRESOURCE0fd1c9213b0545778e5925225bede408?ynotemdtimestamp=1794032975077)
+  ![image](/images/frontend/js-arithmetic-operators.png)
 
 - 赋值运算符
-  ![image](https://note.youdao.com/yws/public/resource/9bd539ebd1c1bff0672cfb820c28533e/WEBf1cf46d4fb00442687a8d30c1835182b/WEBRESOURCE8e5368b224e14f2180b7f3985dee9d92?ynotemdtimestamp=1794032975077)
+  ![image](/images/frontend/js-assignment-operators.png)
 
 - 比较运算符
-  ![image](https://note.youdao.com/yws/public/resource/9bd539ebd1c1bff0672cfb820c28533e/WEBf1cf46d4fb00442687a8d30c1835182b/WEBRESOURCEd3cf5db095834ebaa185ff5594709e90?ynotemdtimestamp=1794032975077)
+  ![image](/images/frontend/js-comparison-operators.png)
 
 - 逻辑运算符
-  ![image](https://note.youdao.com/yws/public/resource/9bd539ebd1c1bff0672cfb820c28533e/WEBf1cf46d4fb00442687a8d30c1835182b/WEBRESOURCE99501bc23a4c419b8fec137bdb2fe26e?ynotemdtimestamp=1794032975077)
+  ![image](/images/frontend/js-logical-operators.png)
 
 - 三元运算符
 

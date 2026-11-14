@@ -20,7 +20,7 @@ description: "HttpServletRequest 获取请求参数与请求头、请求转发�
   - 请求，顾名思义，就是使用者希望从服务器端索取一些资源，向服务器发出询问。在B/S架构中，就是客户浏览器向服务器发出询问。在我们的JavaEE工程中，客户浏览器发出询问，要遵循HTTP协议所规定的。
   - 请求对象，就是在JavaEE工程中，用于发送请求的对象。我们常用的对象就是ServletRequest和HttpServletRequest，它们的区别就是是否和HTTP协议有关。
 - 继承体系
-  - ![image](https://note.youdao.com/yws/public/resource/7ced6d6a489dcbea5811f91e71134a68/WEB33e1481cc51c49cbbc21dbd3f139fa9e/WEBRESOURCE59875eb1bba64232949bb919020ba174?ynotemdtimestamp=1794195065493)
+  - ![image](/images/javaweb/request-inheritance.png)
 
 ## 请求对象获取请求行
 
@@ -82,19 +82,32 @@ description: "HttpServletRequest 获取请求参数与请求头、请求转发�
   - tomcat10.1.7的URI编码默认为 UTF-8
   - 当GET方式提交的参数URL编码和tomcat10.1.7默认的URI编码不一致时,就会出现乱码
 - 方式1 : 设置GET方式提交的编码和Tomcat10.1.7的URI默认解析编码一致
-  - ![image.png](https://note.youdao.com/yws/public/resource/7ced6d6a489dcbea5811f91e71134a68/WEB33e1481cc51c49cbbc21dbd3f139fa9e/WEBRESOURCEa391c8b5f7b9454b9734aa05f1a232ca?ynotemdtimestamp=1794195065493)
+
+  > **补充整理**：原文此处配一张 IDE 设置截图（有道云笔记资源已失效，图存不下来了）。
+  > 做法是把页面/提交端使用的字符集（如 HTML 的 `<meta charset>` 或表单页编码）
+  > 设置成与 Tomcat 默认 URI 解析编码 UTF-8 一致，GET 参数就不用转来转去。
+
 - 方式2 : 设置Tomcat10.1.7的URI解析字符集和GET请求发送时所使用URL转码时的字符集一致即可
-  - ![image.png](https://note.youdao.com/yws/public/resource/7ced6d6a489dcbea5811f91e71134a68/WEB33e1481cc51c49cbbc21dbd3f139fa9e/WEBRESOURCEf82abacdfe674cf7825b1200c5bfb547?ynotemdtimestamp=1794195065493)
-  - ![image.png](https://note.youdao.com/yws/public/resource/7ced6d6a489dcbea5811f91e71134a68/WEB33e1481cc51c49cbbc21dbd3f139fa9e/WEBRESOURCE548f9b4e20a840839ce4912962aa760c?ynotemdtimestamp=1794195065493)
+
+  > **补充整理**：原文此处配两张配置截图（有道云笔记资源已失效）。思路是反过来改
+  > Tomcat 侧：在 `server.xml` 的 Connector 上加 `URIEncoding="页面所用字符集"`
+  > （老版本 Tomcat 常见写法），让 URI 解析编码迁就提交端。两边字符集对上，乱码即消失。
+
 - POST请求乱码分析
   - POST请求将参数放在请求体中进行发送
   - 请求体使用的字符集受`<meta charset="字符集"/>` 的影响
   - Tomcat10.1.7 默认使用UTF-8字符集对请求体进行解析
   - 如果请求体的URL转码和Tomcat的请求体解析编码不一致,就容易出现乱码
 - 方式1 : 请求时,使用UTF-8字符集提交请求体 (推荐)
-  - ![image.png](https://note.youdao.com/yws/public/resource/7ced6d6a489dcbea5811f91e71134a68/WEB33e1481cc51c49cbbc21dbd3f139fa9e/WEBRESOURCE30ef3d5f43aa4c329a8da5df7d271a98?ynotemdtimestamp=1794195065493)
+
+  > **补充整理**：原文此处配图已失效。即保证页面以 UTF-8 提交（`<meta charset="UTF-8">`），
+  > 与 Tomcat 默认的请求体解析编码一致，后端无需任何额外处理。
+
 - 方式2 : 后端在获取参数前,设置解析请求体使用的字符集和请求发送时使用的字符集一致 (不推荐)
-  - ![image.png](https://note.youdao.com/yws/public/resource/7ced6d6a489dcbea5811f91e71134a68/WEB33e1481cc51c49cbbc21dbd3f139fa9e/WEBRESOURCE9e661b551a1f4cd0bfc2cace51875a7c?ynotemdtimestamp=1794195065493)
+
+  > **补充整理**：原文此处配图已失效。做法是在读取参数前先调用
+  > `request.setCharacterEncoding("页面字符集")`，只对请求体（POST）有效；
+  > 不推荐是因为它把编码约定散落在每个 Servlet 里，漏写一处就乱码。
 
 ## 请求转发
 
@@ -115,7 +128,7 @@ description: "HttpServletRequest 获取请求参数与请求头、请求转发�
   - 响应，它表示了服务器端收到请求，同时也已经处理完成，把处理的结果告知用户。简单来说，指的就是服务器把请求的处理结果告知客户端。在B/S架构中，响应就是把结果带回浏览器。
   - 响应对象，顾名思义就是用于在JavaWeb工程中实现上述功能的对象。
 - 继承体系
-  - ![image](https://note.youdao.com/yws/public/resource/7ced6d6a489dcbea5811f91e71134a68/WEB33e1481cc51c49cbbc21dbd3f139fa9e/WEBRESOURCE68b6b0b3b8f54f71af82f309fff0673f?ynotemdtimestamp=1794195065493)
+  - ![image](/images/javaweb/response-inheritance.png)
 
 ## 响应对象之输出内容
 
